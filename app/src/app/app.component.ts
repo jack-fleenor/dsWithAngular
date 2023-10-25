@@ -21,6 +21,7 @@ export class AppComponent {
     if(next_pos > -1 && next_pos < this.cards.length){ this.current = next_pos; }
     else if( next_pos === -1 ) { this.current = this.cards.length - 1; }
     else { this.current = 0; }
+    this.card = this.cards[this.current];
   };
 
 }

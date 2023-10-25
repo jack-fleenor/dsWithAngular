@@ -1,15 +1,18 @@
+
 <div
-class="flip-card card text-center shadow" 
-style="width: 18rem; margin: 25px;" 
+*ngIf="card else null"
+class="flip-card card text-center shadow m-3" 
+style="min-height: 150px; max-width: 500px;" 
 (click)="$event.preventDefault(); card.flipCard()"
 >
 <div class="card-body">
   <div class="card-title text-center">
-    {{
+    <h2>{{
       card.flipped ?
       card.back :
       card.front
     }}
+    </h2>
   </div>
 </div>
 </div>

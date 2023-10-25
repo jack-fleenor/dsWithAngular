@@ -1,24 +1,10 @@
-<ul>
+<ul style="list-style-type: none;" class="p-0">
   <div *ngIf="cards.length === 0">
     no cards found
   </div>
   <div *ngIf="cards.length !== 0">
     <li *ngFor="let card of cards">
-      <div
-      class="flip-card card text-center shadow" 
-      style="width: 18rem; margin: 25px;" 
-      (click)="$event.preventDefault(); card.flipCard()"
-    >
-      <div class="card-body">
-        <div class="card-title text-center">
-          {{
-            card.flipped ?
-            card.back :
-            card.front
-          }}
-        </div>
-      </div>
-    </div>
+      <app-flash-card [card]="card"></app-flash-card>
     </li>
 
 

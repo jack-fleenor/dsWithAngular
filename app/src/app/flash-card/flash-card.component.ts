@@ -7,8 +7,7 @@ import { FlashCard } from 'src/models/FlashCard';
   styleUrls: ['./flash-card.component.scss']
 })
 export class FlashCardComponent {
-  @Input() cards : FlashCard[] = [];
-  @Input() card : FlashCard = this.cards[0];
+  @Input() card? : FlashCard;
   constructor() { };
   ngOnInit() : void 
   {};
