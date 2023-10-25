@@ -1,0 +1,8 @@
+<div class="container">
+  <app-add-flashcard
+    (addFlashCard)="cards.push($event)"
+  ></app-add-flashcard>
+  <app-flash-cards
+    [cards]="cards"
+  ></app-flash-cards>
+</div>

@@ -1,0 +1,33 @@
+<form style="width: 25rem; margin: 25px;">
+  <div class="mb-3">
+    <label class="form-label">
+      Front
+    </label>
+    <input 
+      type="text" 
+      name="new-flash-card-front" 
+      class="form-control"
+      [(ngModel)]="frontText"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">
+      Back
+    </label>
+    <input 
+      type="text" 
+      name="new-flash-card-front" 
+      class="form-control"
+      [(ngModel)]="backText"
+    />
+  </div>
+  <div>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      (click)="$event.preventDefault(); addNewFlashCard()"
+    >
+      Add Flash Card
+    </button>
+  </div>
+</form>
