@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { AddFlashcardComponent } from './add-flashcard/add-flashcard.component';
 import { FlashCardsComponent } from './flash-cards/flash-cards.component';
+import { FlashCardComponent } from './flash-card/flash-card.component';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { FlashCardsComponent } from './flash-cards/flash-cards.component';
     AppComponent,
     AddFlashcardComponent,
     FlashCardsComponent,
+    FlashCardComponent,
   ],
   imports: [
     BrowserModule,

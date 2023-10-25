@@ -6,7 +6,10 @@ export class FlashcardComponent {
   flipped : boolean = false;
   id : string = uuid.v4();
   constructor
-  (_front: string = "", _back : string = "")
+  (
+    public _front: string = "",
+    public _back : string = ""
+  )
   {
     this.frontText = _front;
     this.backText = _back;

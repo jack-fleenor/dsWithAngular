@@ -1,8 +1,23 @@
-<div class="container">
-  <app-add-flashcard
-    (addFlashCard)="cards.push($event)"
-  ></app-add-flashcard>
-  <app-flash-cards
-    [cards]="cards"
-  ></app-flash-cards>
+<div class="container-fluid d-flex content-center">
+  <div class="container-fluid">
+    <app-add-flashcard (addFlashCard)="cards.push($event)"></app-add-flashcard>
+    <app-flash-cards [cards]="cards"></app-flash-cards>
+  </div>
+  <div class="container-fluid">
+    <app-flash-card [card]="card"></app-flash-card>
+    <div>
+      <button 
+        class="btn btn-secondary" 
+        (click)="$event.preventDefault(); changeCard(-1)"
+      >
+        Prev
+      </button>
+      <button 
+        class="btn btn-secondary"
+        (click)="$event.preventDefault(); changeCard(1)"
+      >
+        Next
+      </button>
+    </div>
+  </div>
 </div>

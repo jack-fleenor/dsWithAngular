@@ -1,7 +1,7 @@
 <form style="width: 25rem; margin: 25px;">
   <div class="mb-3">
     <label class="form-label">
-      Front
+      Question 
     </label>
     <input 
       type="text" 
@@ -12,16 +12,17 @@
   </div>
   <div class="mb-3">
     <label class="form-label">
-      Back
+      Answer
     </label>
-    <input 
+    <textarea 
       type="text" 
       name="new-flash-card-front" 
       class="form-control"
+      rows="3"
       [(ngModel)]="backText"
-    />
+    ></textarea>
   </div>
-  <div>
+  <div class="text-end">
     <button
       type="submit"
       class="btn btn-primary"
