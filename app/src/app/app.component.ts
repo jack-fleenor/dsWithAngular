@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { FlashCard } from '../models/FlashCard';
+import { LinkedList } from './shared/models/LinkedList';
+import { Node } from './shared/models/Node';
 
 @Component({
   selector: 'app-root',
@@ -7,21 +8,13 @@ import { FlashCard } from '../models/FlashCard';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
-  current : number = 0;
-  cards : FlashCard[] = [
-    new FlashCard("First", "Second"),
-    new FlashCard("Third", "Fourth"),
-    new FlashCard("Fifth", "Sixth"),
-  ];
-  card : FlashCard = this.cards[this.current];
-  changeCard(num: number)
-  {
-    const next_pos = this.current + num;
-    if(next_pos > -1 && next_pos < this.cards.length){ this.current = next_pos; }
-    else if( next_pos === -1 ) { this.current = this.cards.length - 1; }
-    else { this.current = 0; }
-    this.card = this.cards[this.current];
-  };
-
+  list = new LinkedList();
+  nodes : Node[] = [];
+  constructor(){
+    this.list.insertFront(4);
+    this.list.insertBack(5);
+    this.list.insertBack(12);
+    this.list.insertFront(69);
+    this.nodes = this.list.traverse();
+  }
 }

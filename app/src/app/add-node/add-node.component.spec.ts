@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FlashCardComponent } from './flash-card.component';
+import { AddNodeComponent } from './add-node.component';
 
-describe('FlashCardComponent', () => {
-  let component: FlashCardComponent;
-  let fixture: ComponentFixture<FlashCardComponent>;
+describe('AddNodeComponent', () => {
+  let component: AddNodeComponent;
+  let fixture: ComponentFixture<AddNodeComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FlashCardComponent]
+      declarations: [AddNodeComponent]
     });
-    fixture = TestBed.createComponent(FlashCardComponent);
+    fixture = TestBed.createComponent(AddNodeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

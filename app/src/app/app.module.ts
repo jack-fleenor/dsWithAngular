@@ -2,17 +2,20 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { AddFlashcardComponent } from './add-flashcard/add-flashcard.component';
-import { FlashCardsComponent } from './flash-cards/flash-cards.component';
-import { FlashCardComponent } from './flash-card/flash-card.component';
-
+import { NodeComponent } from './node/node.component';
+import {SingleLinkedListComponent } from './single-linked-list/single-linked-list.component';
+import { DoubleLinkedListComponent } from './double-linked-list/double-linked-list.component';
+import { CircularlyLinkedListComponent} from './circularly-linked-list/circularly-linked-list.component';
+import { AddNodeComponent } from './add-node/add-node.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddFlashcardComponent,
-    FlashCardsComponent,
-    FlashCardComponent,
+    NodeComponent,
+    SingleLinkedListComponent,
+    DoubleLinkedListComponent,
+    CircularlyLinkedListComponent,
+    AddNodeComponent,
   ],
   imports: [
     BrowserModule,

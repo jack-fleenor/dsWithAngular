@@ -1,0 +1,21 @@
+<div style="max-width: 18rem;">
+  <div class="m-3">
+    <h4>Add Node</h4>
+    <input class="form-control" type="number" [(ngModel)]="value" />
+  </div>
+  <!-- <div class="m-3">
+    <select class="form-select" (change)="$event.preventDefault(); selectNode($event)">
+      <option *ngFor="let node of list.traverse()" [value]="node.id">
+        {{ node.id }}
+      </option>
+    </select>
+  </div> -->
+  <div style="display: flex; justify-content: space-evenly;">
+    <button class="btn btn-secondary" (click)="$event.preventDefault(); addNewNode('back')">
+      Back of List
+    </button>
+    <button class="btn btn-primary" (click)="$event.preventDefault(); addNewNode('front')">
+      Front of List
+    </button>
+  </div>
+</div>

@@ -1,23 +1,11 @@
-<div class="container-fluid d-flex content-center">
-  <div class="container-fluid">
-    <app-add-flashcard (addFlashCard)="cards.push($event)"></app-add-flashcard>
-    <app-flash-cards [cards]="cards"></app-flash-cards>
-  </div>
-  <div class="container-fluid">
-    <app-flash-card [card]="card"></app-flash-card>
-    <div>
-      <button 
-        class="btn btn-secondary" 
-        (click)="$event.preventDefault(); changeCard(-1)"
-      >
-        Prev
-      </button>
-      <button 
-        class="btn btn-secondary"
-        (click)="$event.preventDefault(); changeCard(1)"
-      >
-        Next
-      </button>
+<div class="container-md text-center">
+  <div class="row">
+    <div class="col-4">
+      <app-add-node [list]="list" (addNodeBack)="list.insertBack($event)"
+        (addNodeFront)="list.insertFront($event)"></app-add-node>
+    </div>
+    <div class="col-8">
+      <app-single-linked-list [list]="list"></app-single-linked-list>
     </div>
   </div>
 </div>
