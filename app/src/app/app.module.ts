@@ -7,6 +7,7 @@ import {SingleLinkedListComponent } from './single-linked-list/single-linked-lis
 import { DoubleLinkedListComponent } from './double-linked-list/double-linked-list.component';
 import { CircularlyLinkedListComponent} from './circularly-linked-list/circularly-linked-list.component';
 import { AddNodeComponent } from './add-node/add-node.component';
+import { DataStructureChoiceComponent } from './data-structure-choice/data-structure-choice.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { AddNodeComponent } from './add-node/add-node.component';
     DoubleLinkedListComponent,
     CircularlyLinkedListComponent,
     AddNodeComponent,
+    DataStructureChoiceComponent,
   ],
   imports: [
     BrowserModule,

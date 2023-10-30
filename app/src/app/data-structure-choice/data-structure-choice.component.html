@@ -1,0 +1,17 @@
+<div style="max-width: 18rem;">
+  <div class="m-3">
+    <h3>Choose a Data Structure</h3>
+  </div>
+  <div class="m-3">
+    <select class="form-select" [(ngModel)]="selected" (change)="$event.preventDefault(); handleSelect();">
+      <option *ngFor="let dataStructure of dataStructures" [value]="dataStructure">
+        {{ dataStructure }}
+      </option>
+    </select>
+  </div>
+  <div style="display: flex; justify-content: space-evenly;">
+    <button class="btn btn-secondary" (click)="$event.preventDefault();">
+      Generate Dummy Data
+    </button>
+  </div>
+</div>
