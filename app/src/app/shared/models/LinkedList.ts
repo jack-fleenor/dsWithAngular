@@ -73,6 +73,25 @@ export class LinkedList {
     ++this._count;
     return node;
   }
+  public sort() : void {
+    if(!this.head) return;
+    let current = this.head;
+    while(current.next !== null)
+    {
+      if(current.value <= current.next.value)
+      {
+        console.log('this position is sorted.');
+        current = current.next;
+      }
+      else if(current.value > current.next.value)
+      {
+        console.log('this position is unsorted.')
+        let temp = current;
+        current = current.next;
+        current.next = temp;
+      }
+    }
+  }
   public traverse() : Node[] {
     let nodes: Node[] = [];
     let current = this.head;

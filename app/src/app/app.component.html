@@ -2,6 +2,11 @@
   <div class="row">
     <div class="col-4">
       <app-data-structure-choice (select)="handleEvent($event)"></app-data-structure-choice>
+      <div style="display: flex; justify-content: space-evenly;">
+        <button class="btn btn-secondary" (click)="$event.preventDefault(); generateDummyData()">
+          Generate Dummy Data
+        </button>
+      </div>
       <div *ngIf="selected !== null else null">
         <app-add-node [list]="list" (addNodeBack)="list.insertBack($event)"
           (addNodeFront)="list.insertFront($event)"></app-add-node>
@@ -10,6 +15,18 @@
     <div class="col-8">
       <div *ngIf="selected === 'Single Linked List' else null">
         <app-single-linked-list [list]="list"></app-single-linked-list>
+      </div>
+      <div *ngIf="selected === 'Double Linked List' else null">
+        <app-double-linked-list [list]="list"></app-double-linked-list>
+      </div>
+      <div *ngIf="selected === 'Circular Linked List' else null">
+        <app-double-linked-list [list]="list"></app-double-linked-list>
+      </div>
+      <div *ngIf="selected === 'Dynamic Array' else null">
+        <app-dynamic-array></app-dynamic-array>
+      </div>
+      <div *ngIf="selected === 'Static Array' else null">
+        <app-static-array></app-static-array>
       </div>
     </div>
   </div>

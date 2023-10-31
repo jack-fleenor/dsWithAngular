@@ -2,6 +2,9 @@
   <h1>
     Linked List : {{ list.count }}
   </h1>
+  <!-- <button class="btn btn-secondary" (click)="$event.preventDefault(); list.sort()">
+    Sort
+  </button> -->
   <ul style="list-style-type: none; padding: 0;">
     <li *ngFor="let node; index as i; of list.traverse()" class="card" style="max-width: 18rem; margin-top: 15px;">
       <h4 *ngIf="i === 0 else null" style="margin-top: 15px;">Head</h4>

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { DataStructures } from '../shared/models/DataStructures';
 
 @Component({
   selector: 'app-data-structure-choice',
@@ -6,8 +7,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./data-structure-choice.component.scss']
 })
 export class DataStructureChoiceComponent {
-  @Output() select = new EventEmitter<string>();
-  dataStructures: string[] = [
+  @Output() select = new EventEmitter<DataStructures>();
+  dataStructures: DataStructures[] = [
     'Single Linked List',
     'Double Linked List',
     'Circular Linked List',
@@ -16,7 +17,6 @@ export class DataStructureChoiceComponent {
   ]
   selected = this.dataStructures[0];
   handleSelect(){
-    console.log(this.selected)
     this.select.emit(this.selected)
   }
 }

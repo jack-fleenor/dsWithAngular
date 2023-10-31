@@ -8,6 +8,8 @@ import { DoubleLinkedListComponent } from './double-linked-list/double-linked-li
 import { CircularlyLinkedListComponent} from './circularly-linked-list/circularly-linked-list.component';
 import { AddNodeComponent } from './add-node/add-node.component';
 import { DataStructureChoiceComponent } from './data-structure-choice/data-structure-choice.component';
+import { StaticArrayComponent } from './static-array/static-array.component';
+import { DynamicArrayComponent } from './dynamic-array/dynamic-array.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { DataStructureChoiceComponent } from './data-structure-choice/data-struc
     CircularlyLinkedListComponent,
     AddNodeComponent,
     DataStructureChoiceComponent,
+    StaticArrayComponent,
+    DynamicArrayComponent,
   ],
   imports: [
     BrowserModule,
