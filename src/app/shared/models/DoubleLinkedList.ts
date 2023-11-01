@@ -50,8 +50,16 @@ export class DoubleLinkedList implements LinkedList {
   };
   insertBack(data : number)
   {
-    const temp = new DoublePointedNode(data);
-    return temp;
+    const node = new DoublePointedNode(data);
+    if(!this.head) this.head = node;
+    else {
+      let current = this.head;
+      while(current.next !== null) { current = current.next; }
+      node.prev = current;
+      current.next = node;
+    }
+    ++this._count;
+    return node;
   };
   sort(){}
   traverse()
