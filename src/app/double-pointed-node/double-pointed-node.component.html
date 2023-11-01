@@ -1,0 +1,19 @@
+<div class="card-body">
+  <h5>
+    ID: {{ node.id.substring(0, 5)}}... | Value: {{ node.value }}
+  </h5>
+  <h5>
+    Prev: {{ 
+      node.prev ? 
+      node.prev.id.substring(0, 5) + '...' : 
+      'null_ptr' 
+    }}
+  </h5>
+  <h5>
+    Next: {{ 
+      node.next ? 
+      node.next.id.substring(0, 5) + '...' : 
+      'null_ptr' 
+    }}
+  </h5>
+</div>

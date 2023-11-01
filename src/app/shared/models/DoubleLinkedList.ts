@@ -1,27 +1,67 @@
-import { DoublePointedNode } from '../models/DoublePointedNode';
+import { DoublePointedNode } from "../models/DoublePointedNode";
+import { LinkedList } from "./LinkedList";
 
-export class DoubleLinkedList {
-  private head : DoublePointedNode | null = null;
-  private _count : number = 0;
-  public get count() : number { return this._count; };
-  
-  public set push(value : number)
+export class DoubleLinkedList implements LinkedList {
+  public head : DoublePointedNode | null = null;
+  public _count : number = 0;
+  public count()
   {
-    if(!this.head)
-    { this.head = new DoublePointedNode(value); }
-    else
-    {
-      const temp = new DoublePointedNode(value);
-      temp.next = this.head;
-      this.head.prev = temp;
-      this.head = temp;
-    }
+    return this._count
   }
-  // public get pop() : DoublePointedNode | null
-  // {
-  //   if(!this.head) return null;
-  //   if(!this.head.next) return this.head;
-  //   let current = this.head;
-  //   let result = current 
-  // }
+  public insertFront(data: number)
+  {
+    const node = new DoublePointedNode(data);
+    if (!this.head) { this.head = node; }
+    else if(this.head)
+    {
+      const temp = this.head;
+      this.head = node;
+      this.head.next = temp;
+      temp.prev = this.head;
+    }
+    this._count++;
+  }
+  public remove(_id: string)
+  {
+    if(this.head && this.head.id === _id){
+      if(this.head.next)
+      {
+        this.head = this.head.next;
+        this.head.prev = null;
+      } else { this.head = null; }
+    }
+    let current = this.head;
+    while (current !== null) {
+      if(current.id === _id)
+      {
+        if(current.next) current.next.prev = current.prev;
+        if(current.prev) current.prev.next = current.next;
+        --this._count;
+        return;
+      }
+      current = current.next;
+    }
+    --this._count;
+    return;
+  }
+  insertAt(value : number, target : string, direction: string)
+  {
+    return null;
+  };
+  insertBack(data : number)
+  {
+    const temp = new DoublePointedNode(data);
+    return temp;
+  };
+  sort(){}
+  traverse()
+  {
+    let nodes: DoublePointedNode[] = [];
+    let current = this.head;
+    while (current) {
+      nodes.push(current);
+      current = current.next;
+    }
+    return nodes;
+  }
 }

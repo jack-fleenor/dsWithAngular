@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { SingleLinkedList } from '../shared/models/SingleLinkedList';
 import { LinkedList } from '../shared/models/LinkedList';
-import { Node } from '../shared/models/Node';
 
 @Component({
   selector: 'app-single-linked-list',
@@ -8,7 +8,7 @@ import { Node } from '../shared/models/Node';
   styleUrls: ['./single-linked-list.component.scss']
 })
 export class SingleLinkedListComponent {
-  @Input() list : LinkedList = new LinkedList();
+  @Input() list : SingleLinkedList = new SingleLinkedList();
   constructor()
   {}
 

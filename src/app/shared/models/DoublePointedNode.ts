@@ -1,6 +1,6 @@
 import * as uuid from 'uuid';
-
-export class DoublePointedNode {
+import { Node } from './Node';
+export class DoublePointedNode implements Node {
   private _id : string;
   private _next : DoublePointedNode | null;
   private _prev : DoublePointedNode | null;

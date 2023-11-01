@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
-import { LinkedList } from '../shared/models/LinkedList';
+import { SingleLinkedList } from '../shared/models/SingleLinkedList';
+import { DoubleLinkedList } from '../shared/models/DoubleLinkedList';
 
 @Component({
   selector: 'app-add-node',
@@ -9,7 +10,7 @@ import { LinkedList } from '../shared/models/LinkedList';
 export class AddNodeComponent {
   @Output() addNodeFront = new EventEmitter<number>();
   @Output() addNodeBack = new EventEmitter<number>();
-  @Input() list : LinkedList = new LinkedList();
+  @Input() list : SingleLinkedList | DoubleLinkedList | null = null;
   value : number = 0;
   addNewNode(direction: string)
   {

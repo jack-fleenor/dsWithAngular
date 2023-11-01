@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { DoubleLinkedList } from '../shared/models/DoubleLinkedList';
 import { LinkedList } from '../shared/models/LinkedList';
-import { Node } from '../shared/models/Node';
 
 @Component({
   selector: 'app-double-linked-list',
@@ -8,7 +8,7 @@ import { Node } from '../shared/models/Node';
   styleUrls: ['./double-linked-list.component.scss']
 })
 export class DoubleLinkedListComponent {
-  @Input() list : LinkedList = new LinkedList();
+  @Input() list : DoubleLinkedList = new DoubleLinkedList();
   constructor()
   {}
 

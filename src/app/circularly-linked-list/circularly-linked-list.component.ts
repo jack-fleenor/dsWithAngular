@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { LinkedList } from '../shared/models/LinkedList';
-import { Node } from '../shared/models/Node';
+import { SingleLinkedList } from '../shared/models/SingleLinkedList';
 
 @Component({
   selector: 'app-circularly-linked-list',
@@ -8,7 +7,7 @@ import { Node } from '../shared/models/Node';
   styleUrls: ['./circularly-linked-list.component.scss']
 })
 export class CircularlyLinkedListComponent {
-  @Input() list : LinkedList = new LinkedList();
+  @Input() list : SingleLinkedList = new SingleLinkedList();
   constructor()
   {}
 

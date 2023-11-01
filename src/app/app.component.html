@@ -7,19 +7,19 @@
           Generate Dummy Data
         </button>
       </div>
-      <div *ngIf="selected !== null else null">
-        <app-add-node [list]="list" (addNodeBack)="list.insertBack($event)"
-          (addNodeFront)="list.insertFront($event)"></app-add-node>
-      </div>
     </div>
     <div class="col-8">
-      <div *ngIf="selected === 'Single Linked List' else null">
-        <app-single-linked-list [list]="list"></app-single-linked-list>
+      <div *ngIf="selected === 'Single Linked List' && slist else null">
+        <app-add-node [list]="slist" (addNodeBack)="slist.insertBack($event)"
+          (addNodeFront)="slist.insertFront($event)"></app-add-node>
+        <app-single-linked-list [list]="slist"></app-single-linked-list>
       </div>
-      <div *ngIf="selected === 'Double Linked List' else null">
-        <app-double-linked-list [list]="list"></app-double-linked-list>
+      <div *ngIf="selected === 'Double Linked List' && dlist else null">
+        <app-add-node [list]="dlist" (addNodeBack)="dlist.insertBack($event)"
+          (addNodeFront)="dlist.insertFront($event)"></app-add-node>
+        <app-double-linked-list [list]="dlist"></app-double-linked-list>
       </div>
-      <div *ngIf="selected === 'Circular Linked List' else null">
+      <!-- <div *ngIf="selected === 'Circular Linked List' else null">
         <app-double-linked-list [list]="list"></app-double-linked-list>
       </div>
       <div *ngIf="selected === 'Dynamic Array' else null">
@@ -27,7 +27,7 @@
       </div>
       <div *ngIf="selected === 'Static Array' else null">
         <app-static-array></app-static-array>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
