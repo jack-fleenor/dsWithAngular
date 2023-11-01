@@ -11,9 +11,9 @@ export class DataStructureChoiceComponent {
   dataStructures: DataStructures[] = [
     'Single Linked List',
     'Double Linked List',
-    'Circular Linked List',
-    'Static Array',
-    'Dynamic Array'
+    // 'Circular Linked List',
+    // 'Static Array',
+    // 'Dynamic Array'
   ]
   selected = this.dataStructures[0];
   handleSelect(){
