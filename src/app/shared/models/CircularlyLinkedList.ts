@@ -27,10 +27,11 @@ export class CircularlyLinkedList implements LinkedList {
     else
     {
       const temp = this.head;
-      node.prev = this.getNodeByPosition(this.count() + 1)
+      temp.prev = node;
+      node.prev = this.getNodeByPosition(this.count())
+      this.getNodeByPosition(this.count())!.next = node;
+      node.next = temp;
       this.head = node;
-      this.head.next = temp;
-      temp.prev = this.head;
     }
     this._count++;
   }
