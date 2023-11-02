@@ -11,6 +11,7 @@ import { DataStructureChoiceComponent } from './data-structure-choice/data-struc
 import { StaticArrayComponent } from './static-array/static-array.component';
 import { DynamicArrayComponent } from './dynamic-array/dynamic-array.component';
 import { DoublePointedNodeComponent } from './double-pointed-node/double-pointed-node.component';
+import { AnimatedNodeComponent } from './animated-node/animated-node.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { DoublePointedNodeComponent } from './double-pointed-node/double-pointed
     StaticArrayComponent,
     DynamicArrayComponent,
     DoublePointedNodeComponent,
+    AnimatedNodeComponent,
   ],
   imports: [
     BrowserModule,

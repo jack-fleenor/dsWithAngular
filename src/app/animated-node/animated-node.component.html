@@ -1,0 +1,12 @@
+
+<div class="node container" [id]="node.id">
+  <div class="node prev-arrow">
+    <i *ngIf="node.prev" class="bi bi-arrow-bar-left"></i>
+  </div>
+  <div class="node item">
+    {{ node.value }}
+  </div>
+  <div class="next-arrow">
+    <i *ngIf="node.next" class="bi bi-arrow-bar-right"></i>
+  </div>
+</div>
