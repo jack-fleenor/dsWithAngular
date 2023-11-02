@@ -43,7 +43,8 @@ export class AppComponent {
     if(this.selected === IDataStructures.CircularLinkedList){
       this.clist = new CircularlyLinkedList();
       for (let index = 0; index < 10; index++) {
-        const randomNumber = this.generateRandomNumber(100000, 0);
+        // const randomNumber = this.generateRandomNumber(100000, 0);
+        const randomNumber = index + 1;
         this.clist.insertFront(randomNumber);
       }
     }

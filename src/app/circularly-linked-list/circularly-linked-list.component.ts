@@ -11,7 +11,7 @@ export class CircularlyLinkedListComponent {
   currentPosition : number = 1;
   changePosition(direction: 'forward' | 'backward'){
     direction === 'forward' ? this.currentPosition++ : this.currentPosition--;
-    if(this.currentPosition >= this.list.count()) { this.currentPosition = 1; }
+    if(this.currentPosition > this.list.count()) { this.currentPosition = 1; }
     if(this.currentPosition <= 0) { this.currentPosition = this.list.count(); }
   }
   constructor()

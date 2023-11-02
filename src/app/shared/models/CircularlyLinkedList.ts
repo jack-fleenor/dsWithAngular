@@ -9,7 +9,7 @@ export class CircularlyLinkedList implements LinkedList {
   public getNodeByPosition(position : number): DoublePointedNode | null {
     let currentPosition = 1;
     let node : DoublePointedNode | null = this.head;
-    while(currentPosition < this.count() && node)
+    while(currentPosition < this.count() + 1 && node)
     {
       if(currentPosition === position){
         return node;
@@ -62,18 +62,17 @@ export class CircularlyLinkedList implements LinkedList {
   {
     const node = new DoublePointedNode(data);
     if(!this.head) this.head = node;
-    else {
-      this.head.prev = node;
-      let current = this.head;
-      while(current.next !== null) { current = current.next; }
-      node.prev = current;
+    else if(this.head)
+    {
+      const tail = this.getNodeByPosition(this.count())
+      node.prev = tail;
       node.next = this.head;
       this.head.prev = node;
-      current.next = node;
+      tail!.next = node;
+      ++this._count;
     }
-    ++this._count;
     return node;
-  };
+  }
   sort(){}
   traverse()
   {
