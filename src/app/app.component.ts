@@ -4,6 +4,7 @@ import { SinglePointedNode } from './shared/models/SinglePointedNode';
 import { DataStructures, IDataStructures } from './shared/models/DataStructures';
 import { DoubleLinkedList } from './shared/models/DoubleLinkedList';
 import { LinkedList } from './shared/models/LinkedList';
+import { CircularlyLinkedList } from './shared/models/CircularlyLinkedList';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ import { LinkedList } from './shared/models/LinkedList';
 export class AppComponent {
   slist = new SingleLinkedList();
   dlist = new DoubleLinkedList();
+  clist = new CircularlyLinkedList();
   nodes : Node[] = [];
   selected : DataStructures = "Single Linked List";
   constructor(){
@@ -36,6 +38,13 @@ export class AppComponent {
       for (let index = 0; index < 10; index++) {
         const randomNumber = this.generateRandomNumber(100000, 0);
         this.dlist.insertFront(randomNumber);
+      }
+    }
+    if(this.selected === IDataStructures.CircularLinkedList){
+      this.clist = new CircularlyLinkedList();
+      for (let index = 0; index < 10; index++) {
+        const randomNumber = this.generateRandomNumber(100000, 0);
+        this.clist.insertFront(randomNumber);
       }
     }
   }

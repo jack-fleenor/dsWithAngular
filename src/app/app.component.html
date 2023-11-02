@@ -15,10 +15,10 @@
       <div *ngIf="selected === 'Double Linked List' && dlist else null">
         <app-double-linked-list [list]="dlist"></app-double-linked-list>
       </div>
-      <!-- <div *ngIf="selected === 'Circular Linked List' else null">
-        <app-double-linked-list [list]="list"></app-double-linked-list>
+      <div *ngIf="selected === 'Circular Linked List' else null">
+        <app-circularly-linked-list [list]="clist"></app-circularly-linked-list>
       </div>
-      <div *ngIf="selected === 'Dynamic Array' else null">
+      <!-- <div *ngIf="selected === 'Dynamic Array' else null">
         <app-dynamic-array></app-dynamic-array>
       </div>
       <div *ngIf="selected === 'Static Array' else null">

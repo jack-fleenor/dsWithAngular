@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { SingleLinkedList } from '../shared/models/SingleLinkedList';
+import { CircularlyLinkedList } from '../shared/models/CircularlyLinkedList';
 
 @Component({
   selector: 'app-circularly-linked-list',
@@ -7,7 +7,13 @@ import { SingleLinkedList } from '../shared/models/SingleLinkedList';
   styleUrls: ['./circularly-linked-list.component.scss']
 })
 export class CircularlyLinkedListComponent {
-  @Input() list : SingleLinkedList = new SingleLinkedList();
+  @Input() list : CircularlyLinkedList = new CircularlyLinkedList();
+  currentPosition : number = 1;
+  changePosition(direction: 'forward' | 'backward'){
+    direction === 'forward' ? this.currentPosition++ : this.currentPosition--;
+    if(this.currentPosition >= this.list.count()) { this.currentPosition = 1; }
+    if(this.currentPosition <= 0) { this.currentPosition = this.list.count(); }
+  }
   constructor()
   {}
 

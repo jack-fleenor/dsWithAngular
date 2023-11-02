@@ -11,7 +11,7 @@ export class DataStructureChoiceComponent {
   dataStructures: DataStructures[] = [
     'Single Linked List',
     'Double Linked List',
-    // 'Circular Linked List',
+    'Circular Linked List',
     // 'Static Array',
     // 'Dynamic Array'
   ]

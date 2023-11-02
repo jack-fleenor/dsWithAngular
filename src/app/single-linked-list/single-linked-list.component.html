@@ -3,7 +3,7 @@
     <div class="card" style="width: 100%">
       <div class="card-body" style="text-align: center;">
         <h4 class="card-title">
-          Doubly Linked List : {{ list.count() }}
+          Single Linked List : {{ list.count() }}
         </h4>
         <app-add-node [list]="list" (addNodeBack)="list.insertBack($event)" (addNodeFront)="list.insertFront($event)"
           class="card-text"></app-add-node>
