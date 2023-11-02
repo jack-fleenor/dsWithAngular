@@ -10,13 +10,9 @@
     </div>
     <div class="col-8">
       <div *ngIf="selected === 'Single Linked List' && slist else null">
-        <app-add-node [list]="slist" (addNodeBack)="slist.insertBack($event)"
-          (addNodeFront)="slist.insertFront($event)"></app-add-node>
         <app-single-linked-list [list]="slist"></app-single-linked-list>
       </div>
       <div *ngIf="selected === 'Double Linked List' && dlist else null">
-        <app-add-node [list]="dlist" (addNodeBack)="dlist.insertBack($event)"
-          (addNodeFront)="dlist.insertFront($event)"></app-add-node>
         <app-double-linked-list [list]="dlist"></app-double-linked-list>
       </div>
       <!-- <div *ngIf="selected === 'Circular Linked List' else null">

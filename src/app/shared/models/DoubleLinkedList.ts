@@ -8,6 +8,23 @@ export class DoubleLinkedList implements LinkedList {
   {
     return this._count
   }
+  public get headNode() : DoublePointedNode | null {
+    return this.head;
+  }
+  public getNodeByPosition(position : number): DoublePointedNode | null {
+    let currentPosition = 1;
+    let node : DoublePointedNode | null = this.head;
+    while(currentPosition < this.count() && node)
+    {
+      if(currentPosition === position){
+        return node;
+      }
+      if(node.next)
+      {node = node.next;}
+      ++currentPosition;
+    }
+    return node;
+  }
   public insertFront(data: number)
   {
     const node = new DoublePointedNode(data);

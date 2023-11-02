@@ -5,10 +5,27 @@ export class SingleLinkedList implements LinkedList {
   public head : SinglePointedNode | null = null;
   public _count : number = 0;
   public count() { return this._count; };
-  
+  public getNodeByPosition(position : number): SinglePointedNode | null {
+    let currentPosition = 1;
+    let node : SinglePointedNode | null = this.head;
+    while(currentPosition < this.count() && node)
+    {
+      if(currentPosition === position){
+        return node;
+      }
+      if(node.next)
+      {node = node.next;}
+      ++currentPosition;
+    }
+    return node;
+  } 
   public remove(_id : string)
   {
-    if(this.head && this.head.id === _id) this.head = null;
+    if(this.head && this.head.id === _id)
+    {
+      if(this.head.next) this.head = this.head.next;
+      else this.head = null;
+    }
     let current = this.head;
     while(current !== null)
     {

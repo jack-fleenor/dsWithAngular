@@ -1,18 +1,23 @@
 <div style="margin: 25px">
-  <h1>
-    Linked List : {{ list.count() }}
-  </h1>
-  <!-- <button class="btn btn-secondary" (click)="$event.preventDefault(); list.sort()">
-    Sort
-  </button> -->
-  <ul style="list-style-type: none; padding: 0;">
-    <li *ngFor="let node; index as i; of list.traverse()" class="card" style="max-width: 18rem; margin-top: 15px;">
-      <h4 *ngIf="i === 0 else null" style="margin-top: 15px;">Head</h4>
-      <h4 *ngIf="i === list.count() - 1 else null" style="margin-top: 15px;">Tail</h4>
-      <app-node [node]="node"></app-node>
-      <button (click)="list.remove(node.id)" class="btn btn-danger">
-        delete
+  <div class="container" style="display: block; justify-content: center; align-items: center;">
+    <div class="card" style="width: 100%">
+      <div class="card-body" style="text-align: center;">
+        <h4 class="card-title">
+          Doubly Linked List : {{ list.count() }}
+        </h4>
+        <app-add-node [list]="list" (addNodeBack)="list.insertBack($event)" (addNodeFront)="list.insertFront($event)"
+          class="card-text"></app-add-node>
+      </div>
+    </div>
+    <div *ngIf="list.getNodeByPosition(currentPosition) !== null else null" class="card" style="width: 100%">
+      <app-node [node]="list.getNodeByPosition(currentPosition)!"></app-node>
+      <button class="btn btn-primary" [disabled]="currentPosition === list.count()" (click)="changePosition('forward')">
+        <h1>
+          {{list.getNodeByPosition(this.currentPosition)?.next === null ? 'null_ptr' :
+          list.getNodeByPosition(this.currentPosition)!.next!.id.substring(0, 5) + '...'}}
+          <i class="bi bi-arrow-bar-right"></i>
+        </h1>
       </button>
-    </li>
-  </ul>
+    </div>
+  </div>
 </div>
