@@ -1,38 +1,95 @@
 <div style="margin: 25px">
   <div class="container" style="display: block; justify-content: center; align-items: center;">
-    <div class="card" style="width: 100%">
-      <div class="card-body" style="text-align: center;">
-        <h4 class="card-title">
-          Circularly Linked List : {{ list.count() }}
-        </h4>
-        <app-add-node [list]="list" (addNodeBack)="list.insertBack($event)" (addNodeFront)="list.insertFront($event)"
-          class="card-text"></app-add-node>
+    <div class="row">
+      <div class="col-8">
+        <div class="card" style="text-align: left;">
+          <div class="card-body">
+            <div class="card-title">
+              <h2>
+                Circular Linked List
+              </h2>
+            </div>
+            <div class="card-text" style="margin-bottom: 15px;">
+              A circular linked list is a variation of a linked list data structure in which the last node of the list
+              is connected back to the first node, forming a closed loop or circle. In a standard singly linked list,
+              the last node typically points to null to indicate the end of the list, but in a circular linked list, it
+              points back to the first node. Like a doubly linked list, it is a collection of elements, or nodes, that
+              contains three components:
+            </div>
+            <div class="card-text" style="margin-bottom: 15px;">
+              Data: This is the actual value or payload held by the node. It can be of any data type.
+            </div>
+            <div class="card-text" style="margin-bottom: 15px;">
+              Next: A reference or pointer to the next node in the sequence, just like in a singly linked list. This
+              pointer connects the current node to the following node.
+            </div>
+            <div class="card-text" style="margin-bottom: 15px;">
+              Previous: A reference or pointer to the previous node in the sequence. This is the key feature that
+              distinguishes a doubly linked list from a singly linked list. The previous pointer allows you to traverse
+              the list in both directions, forwards and backwards.
+            </div>
+            <img src="../../assets/Circle Linked List.gif" alt="this slowpoke moves" width="250" />
+            <div class="card-text" style="margin-bottom: 15px;">
+              Key characteristics of a circular linked list:
+            </div>
+            <div class="card-text" style="margin-bottom: 15px;">
+              Infinite Loop: Because the last node points back to the first node, you can traverse the list
+              indefinitely. There is no explicit end, as you can keep following the "next" pointers in a continuous
+              loop.
+            </div>
+            <div class="card-text" style="margin-bottom: 15px;">
+              No Null References: Unlike standard linked lists, where the last node points to null to indicate the end,
+              circular linked lists do not have null references for the "next" pointers within the list.
+            </div>
+            <div class="card-text" style="text-align: left;">
+              <pre>
+<code [innerHTML]="code"></code>
+            </pre>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div *ngIf="list.getNodeByPosition(currentPosition) !== null else null" class="card" style="width: 100%">
-      <button class="btn btn-secondary" (click)="changePosition('backward')">
-        <h1>
-          <i class="bi bi-arrow-bar-left"></i>
-          {{list.getNodeByPosition(this.currentPosition)?.prev === null ? 'null_ptr' :
-          list.getNodeByPosition(this.currentPosition)!.prev!.id.substring(0, 5) + '...'}}
-        </h1>
-      </button>
-      <div>
-        <h1 *ngIf="list.getNodeByPosition(1)!.id === list.getNodeByPosition(currentPosition)!.id else null">
-          Head Node
-        </h1>
-        <h1 *ngIf="list.getNodeByPosition(list.count())!.id === list.getNodeByPosition(currentPosition)!.id else null">
-          Tail Node
-        </h1>
+      <div class="col-4">
+        <div class="card" style="width: 100%">
+          <div class="card-body" style="text-align: center;">
+            <app-add-node [list]="list" (addNodeBack)="list.insertBack($event)"
+              (addNodeFront)="list.insertFront($event)" class="card-text"></app-add-node>
+            <div style="display: flex; justify-content: space-evenly;" class="mt-2">
+              <button class="btn btn-secondary" (click)="$event.preventDefault(); generateDummyData()">
+                Generate Dummy Data
+              </button>
+            </div>
+            <div *ngIf="list.getNodeByPosition(currentPosition) !== null else null" class="card mt-2"
+              style="width: 100%">
+              <button class="btn btn-primary" [disabled]="list.getNodeByPosition(this.currentPosition)!.prev === null"
+                (click)="changePosition('backward')">
+                <h4>
+                  {{list.getNodeByPosition(this.currentPosition)?.prev === null ? 'null_ptr' :
+                  list.getNodeByPosition(this.currentPosition)!.prev!.id.substring(0, 5) + '...'}}
+                  <i class="bi bi-arrow-bar-left"></i>
+                </h4>
+              </button>
+              <div>
+                <h1 *ngIf="list.getNodeByPosition(1)!.id === list.getNodeByPosition(currentPosition)!.id else null">
+                  Head Node
+                </h1>
+                <h1
+                  *ngIf="list.getNodeByPosition(list.count())!.id === list.getNodeByPosition(currentPosition)!.id else null">
+                  Tail Node
+                </h1>
+              </div>
+              <app-double-pointed-node [node]="list.getNodeByPosition(currentPosition)!"></app-double-pointed-node>
+              <button class="btn btn-primary" (click)="changePosition('forward')">
+                <h4>
+                  {{list.getNodeByPosition(this.currentPosition)?.next === null ? 'null_ptr' :
+                  list.getNodeByPosition(this.currentPosition)!.next!.id.substring(0, 5) + '...'}}
+                  <i class="bi bi-arrow-bar-right"></i>
+                </h4>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-      <app-double-pointed-node [node]="list.getNodeByPosition(currentPosition)!"></app-double-pointed-node>
-      <button class="btn btn-primary" (click)="changePosition('forward')">
-        <h1>
-          {{list.getNodeByPosition(this.currentPosition)!.next === null ? 'null_ptr' :
-          list.getNodeByPosition(this.currentPosition)!.next!.id.substring(0, 5) + '...'}}
-          <i class="bi bi-arrow-bar-right"></i>
-        </h1>
-      </button>
     </div>
   </div>
 </div>

@@ -1,23 +1,60 @@
 <div style="margin: 25px">
   <div class="container" style="display: block; justify-content: center; align-items: center;">
-    <div class="card" style="width: 100%">
-      <div class="card-body" style="text-align: center;">
-        <h4 class="card-title">
-          Single Linked List : {{ list.count() }}
-        </h4>
-        <app-add-node [list]="list" (addNodeBack)="list.insertBack($event)" (addNodeFront)="list.insertFront($event)"
-          class="card-text"></app-add-node>
+    <div class="row">
+      <div class="col-8">
+        <div class="card" style="text-align: left;">
+          <div class="card-body">
+            <div class="card-title">
+              <h2>
+                Single Linked List
+              </h2>
+            </div>
+            <div class="card-text" style="margin-bottom: 15px;">
+              A singly linked list is a fundamental data structure in computer science and programming. It is a
+              collection of elements, often referred to as nodes, where each node contains two components:
+            </div>
+            <div class="card-text" style="margin-bottom: 15px;">
+              Data: The actual value or payload that the node holds. This data can be of any data type (e.g., integers,
+              strings, custom objects, etc.).
+            </div>
+            <div class="card-text" style="margin-bottom: 15px;">
+              Next: A reference or pointer to the next node in the sequence. This is what makes it a "linked" list. The
+              next pointer connects one node to the next, forming a chain-like structure.
+            </div>
+            <img src="../../assets/singlelinkedlist.gif" alt="this slowpoke moves" width="250" />
+            <div class="card-text" style="text-align: left;">
+              <pre>
+<code [innerHTML]="code"></code>
+            </pre>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div *ngIf="list.getNodeByPosition(currentPosition) !== null else null" class="card" style="width: 100%">
-      <app-node [node]="list.getNodeByPosition(currentPosition)!"></app-node>
-      <button class="btn btn-primary" [disabled]="currentPosition === list.count()" (click)="changePosition('forward')">
-        <h1>
-          {{list.getNodeByPosition(this.currentPosition)?.next === null ? 'null_ptr' :
-          list.getNodeByPosition(this.currentPosition)!.next!.id.substring(0, 5) + '...'}}
-          <i class="bi bi-arrow-bar-right"></i>
-        </h1>
-      </button>
+      <div class="col-4">
+        <div class="card" style="width: 100%">
+          <div class="card-body" style="text-align: center;">
+            <app-add-node [list]="list" (addNodeBack)="list.insertBack($event)"
+              (addNodeFront)="list.insertFront($event)" class="card-text"></app-add-node>
+            <div style="display: flex; justify-content: space-evenly;" class="mt-2">
+              <button class="btn btn-secondary" (click)="$event.preventDefault(); generateDummyData()">
+                Generate Dummy Data
+              </button>
+            </div>
+            <div *ngIf="list.getNodeByPosition(currentPosition) !== null else null" class="card mt-2"
+              style="width: 100%">
+              <app-node [node]="list.getNodeByPosition(currentPosition)!"></app-node>
+              <button class="btn btn-primary" [disabled]="currentPosition === list.count()"
+                (click)="changePosition('forward')">
+                <h4>
+                  {{list.getNodeByPosition(this.currentPosition)?.next === null ? 'null_ptr' :
+                  list.getNodeByPosition(this.currentPosition)!.next!.id.substring(0, 5) + '...'}}
+                  <i class="bi bi-arrow-bar-right"></i>
+                </h4>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

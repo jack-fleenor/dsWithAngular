@@ -16,6 +16,7 @@ export class AppComponent {
   dlist = new DoubleLinkedList();
   clist = new CircularlyLinkedList();
   nodes : Node[] = [];
+
   selected : DataStructures = "Single Linked List";
   constructor(){
   }
@@ -43,8 +44,7 @@ export class AppComponent {
     if(this.selected === IDataStructures.CircularLinkedList){
       this.clist = new CircularlyLinkedList();
       for (let index = 0; index < 10; index++) {
-        // const randomNumber = this.generateRandomNumber(100000, 0);
-        const randomNumber = index + 1;
+        const randomNumber = this.generateRandomNumber(100000, 0);
         this.clist.insertFront(randomNumber);
       }
     }
