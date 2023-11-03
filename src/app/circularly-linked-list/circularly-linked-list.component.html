@@ -52,37 +52,37 @@
       <div class="col-4">
         <div class="card" style="width: 100%">
           <div class="card-body" style="text-align: center;">
-            <app-add-node [list]="list" (addNodeBack)="list.insertBack($event)"
-              (addNodeFront)="list.insertFront($event)" class="card-text"></app-add-node>
+            <app-add-node [list]="this.list" (addNodeBack)="this.list.append($event)"
+              (addNodeFront)="this.list.prepend($event)" class="card-text"></app-add-node>
             <div style="display: flex; justify-content: space-evenly;" class="mt-2">
               <button class="btn btn-secondary" (click)="$event.preventDefault(); generateDummyData()">
                 Generate Dummy Data
               </button>
             </div>
-            <div *ngIf="list.getNodeByPosition(currentPosition) !== null else null" class="card mt-2"
+            <div *ngIf="this.current !== null else null" class="card mt-2"
               style="width: 100%">
-              <button class="btn btn-primary" [disabled]="list.getNodeByPosition(this.currentPosition)!.prev === null"
+              <button class="btn btn-primary" [disabled]="this.current.prev === null"
                 (click)="changePosition('backward')">
                 <h4>
-                  {{list.getNodeByPosition(this.currentPosition)?.prev === null ? 'null_ptr' :
-                  list.getNodeByPosition(this.currentPosition)!.prev!.id.substring(0, 5) + '...'}}
+                  {{this.current.prev === null ? 'null_ptr' :
+                  this.current!.prev.id.substring(0, 5) + '...'}}
                   <i class="bi bi-arrow-bar-left"></i>
                 </h4>
               </button>
               <div>
-                <h1 *ngIf="list.getNodeByPosition(1)!.id === list.getNodeByPosition(currentPosition)!.id else null">
+                <h1 *ngIf="this.list.at(1)!.id === this.current.id else null">
                   Head Node
                 </h1>
                 <h1
-                  *ngIf="list.getNodeByPosition(list.count())!.id === list.getNodeByPosition(currentPosition)!.id else null">
+                  *ngIf="this.list.at(list.size)!.id === this.current.id else null">
                   Tail Node
                 </h1>
               </div>
-              <app-double-pointed-node [node]="list.getNodeByPosition(currentPosition)!"></app-double-pointed-node>
+              <app-double-pointed-node [node]="this.current!"></app-double-pointed-node>
               <button class="btn btn-primary" (click)="changePosition('forward')">
                 <h4>
-                  {{list.getNodeByPosition(this.currentPosition)?.next === null ? 'null_ptr' :
-                  list.getNodeByPosition(this.currentPosition)!.next!.id.substring(0, 5) + '...'}}
+                  {{this.current.next === null ? 'null_ptr' :
+                  this.current.next.id.substring(0, 5) + '...'}}
                   <i class="bi bi-arrow-bar-right"></i>
                 </h4>
               </button>

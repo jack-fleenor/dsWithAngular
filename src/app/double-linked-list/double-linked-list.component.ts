@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { DoubleLinkedList } from '../shared/models/DoubleLinkedList';
+import { DoubleLinkedList } from '../shared/newModels/models/DoubleLinkedList';
+import { DoublePointedNode } from '../shared/newModels/models/DoublePointedNode';
 
 @Component({
   selector: 'app-double-linked-list',
@@ -7,7 +8,8 @@ import { DoubleLinkedList } from '../shared/models/DoubleLinkedList';
   styleUrls: ['./double-linked-list.component.scss']
 })
 export class DoubleLinkedListComponent {
-  @Input() list : DoubleLinkedList = new DoubleLinkedList();
+  list : DoubleLinkedList = new DoubleLinkedList();
+  current : DoublePointedNode | null = null;
   code = `export class LinkedList {
     public head : Node | null = null;
     public insert(data : number)
@@ -26,20 +28,10 @@ export class DoubleLinkedListComponent {
   }`
   currentPosition : number = 1;
   changePosition(direction: 'forward' | 'backward'){
-    if(direction === 'backward')
-    {
-      if(this.currentPosition === 1){this.currentPosition === this.list.count();}
-      else{--this.currentPosition}
+    if(this.list){
+      if(direction === 'forward') { this.current = this.current ? this.current.next : null; }
+      else this.current = this.current ? this.current.prev : null;
     }
-    else if(direction === 'forward')
-    {
-      if(this.currentPosition === this.list.count()){this.currentPosition === 1;}
-      else{++this.currentPosition}
-    }
-  }
-  constructor()
-  {
-    // this.current = list
   }
   generateRandomNumber(max: number, min: number){
     return  Math.floor(Math.random() * (max - min + 1) + min)
@@ -47,8 +39,8 @@ export class DoubleLinkedListComponent {
   generateDummyData(){
     this.list = new DoubleLinkedList();
     for (let index = 0; index < 10; index++) {
-      const randomNumber = this.generateRandomNumber(100000, 0);
-      this.list.insertFront(randomNumber);
+      this.list.append(this.generateRandomNumber(100000, 0));
     }
-  } 
+    this.current = this.list.head;
+  }
 }

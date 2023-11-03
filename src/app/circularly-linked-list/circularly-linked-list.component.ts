@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CircularlyLinkedList } from '../shared/models/CircularlyLinkedList';
+import { CircularlyLinkedList } from '../shared/newModels/models/CircularlyLinkedList';
+import { DoublePointedNode } from '../shared/newModels/models/DoublePointedNode';
 
 @Component({
   selector: 'app-circularly-linked-list',
@@ -7,41 +8,39 @@ import { CircularlyLinkedList } from '../shared/models/CircularlyLinkedList';
   styleUrls: ['./circularly-linked-list.component.scss']
 })
 export class CircularlyLinkedListComponent {
-  @Input() list : CircularlyLinkedList = new CircularlyLinkedList();
+  list : CircularlyLinkedList = new CircularlyLinkedList();
+  current : DoublePointedNode | null = null;
   code = `export class LinkedList {
     public head : Node | null = null;
     public insert(data : number)
     {
-      const node = new Node(data);
+      const node = new DoublePointedNode(data);
       if (!this.head) { this.head = node; }
-      else
+      else if(this.head)
       {
         const temp = this.head;
-        temp.prev = node;
-        node.prev = this.getNodeByPosition(this.count())
-        this.getNodeByPosition(this.count())!.next = node;
-        node.next = temp;
         this.head = node;
+        this.head.next = temp;
+        temp.prev = this.head;
       }
       this._count++;
     }
   }`
   currentPosition : number = 1;
   changePosition(direction: 'forward' | 'backward'){
-    direction === 'forward' ? this.currentPosition++ : this.currentPosition--;
-    if(this.currentPosition > this.list.count()) { this.currentPosition = 1; }
-    if(this.currentPosition <= 0) { this.currentPosition = this.list.count(); }
+    if(this.list){
+      if(direction === 'forward') { this.current = this.current ? this.current.next : null; }
+      else this.current = this.current ? this.current.prev : null;
+    }
   }
-  constructor()
-  {}
   generateRandomNumber(max: number, min: number){
     return  Math.floor(Math.random() * (max - min + 1) + min)
   }
   generateDummyData(){
     this.list = new CircularlyLinkedList();
     for (let index = 0; index < 10; index++) {
-      const randomNumber = this.generateRandomNumber(100000, 0);
-      this.list.insertFront(randomNumber);
+      this.list.append(this.generateRandomNumber(100000, 0));
     }
-  } 
+    this.current = this.list.head;
+  }
 }

@@ -4,14 +4,14 @@
       <app-data-structure-choice (select)="handleEvent($event)"></app-data-structure-choice>
     </div>
     <div class="col-10">
-      <div *ngIf="selected === 'Single Linked List' && slist else null">
-        <app-single-linked-list [list]="slist"></app-single-linked-list>
+      <div *ngIf="selected === 'Single Linked List' else null">
+        <app-single-linked-list></app-single-linked-list>
       </div>
-      <div *ngIf="selected === 'Double Linked List' && dlist else null">
-        <app-double-linked-list [list]="dlist"></app-double-linked-list>
+      <div *ngIf="selected === 'Double Linked List' else null">
+        <app-double-linked-list></app-double-linked-list>
       </div>
       <div *ngIf="selected === 'Circular Linked List' else null">
-        <app-circularly-linked-list [list]="clist"></app-circularly-linked-list>
+        <app-circularly-linked-list></app-circularly-linked-list>
       </div>
       <!-- <div *ngIf="selected === 'Dynamic Array' else null">
         <app-dynamic-array></app-dynamic-array>

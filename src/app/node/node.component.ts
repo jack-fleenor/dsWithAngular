@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { SinglePointedNode } from '../shared/models/SinglePointedNode';
+import { SinglePointedNode } from '../shared/newModels/models/SinglePointedNode';
 
 @Component({
   selector: 'app-node',

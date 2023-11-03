@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
-import { SingleLinkedList } from '../shared/models/SingleLinkedList';
-import { DoubleLinkedList } from '../shared/models/DoubleLinkedList';
-import { CircularlyLinkedList } from '../shared/models/CircularlyLinkedList';
+import { SingleLinkedList } from '../shared/newModels/models/SingleLinkedList';
+import { DoubleLinkedList } from '../shared/newModels/models/DoubleLinkedList';
+import { CircularlyLinkedList } from '../shared/newModels/models/CircularlyLinkedList';
 
 @Component({
   selector: 'app-add-node',
