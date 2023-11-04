@@ -1,86 +1,31 @@
-import { LinkedList } from './LinkedList';
+import { LinkedList, LinkedListValueType } from './LinkedList';
 import { SinglePointedNode } from './SinglePointedNode';
 
 export class SingleLinkedList implements LinkedList {
-  public head : SinglePointedNode | null = null;
-  public _count : number = 0;
-  public count() { return this._count; };
-  public getNodeByPosition(position : number): SinglePointedNode | null {
-    let currentPosition = 1;
-    let node : SinglePointedNode | null = this.head;
-    while(currentPosition < this.count() && node)
-    {
-      if(currentPosition === position){
-        return node;
-      }
-      if(node.next)
-      {node = node.next;}
-      ++currentPosition;
-    }
-    return node;
-  } 
-  public remove(_id : string)
-  {
-    if(this.head && this.head.id === _id)
-    {
-      if(this.head.next) this.head = this.head.next;
-      else this.head = null;
-    }
-    let current = this.head;
-    while(current !== null)
-    {
-      if(current.next)
-      {
-        if(current.next.id === _id)
-        {
-          current.next = current.next.next ? current.next.next : null;
-          --this._count;
-          return;
-        }
-      }
-      current = current.next;
-    }
-    --this._count;
-    return;
+  private _head : SinglePointedNode | null = null;
+  private _size : number = 0;
+  // Getters
+  public get head(): SinglePointedNode | null  { return this._head; };
+  public get size(): number { return this._size; }
+  // Setters
+  public set head(node : SinglePointedNode | null) {
+    this._head = node ? node : null;
   }
-  public insertFront(data : number)
-  {
+  public set next(node: SinglePointedNode) {
+    this.head ? this.head.next = node : this.head = node;
+  }
+  // Insertion Methods
+  prepend(data: LinkedListValueType): SinglePointedNode {
     const node = new SinglePointedNode(data);
     if(!this.head) this.head = node;
     else {
       node.next = this.head;
       this.head = node;
     }
-    ++this._count;
+    ++this._size;
     return node;
   }
-  public insertAt(value : number, target : string, direction: string)
-  {
-    const node = new SinglePointedNode(value);
-    let current = this.head;
-    while(current)
-    {
-      if(current.id === target)
-      {
-        if(direction === 'back')
-        {
-          node.next = current;
-          current = node;
-        }
-        else if(direction === 'front')
-        {
-          if(current.next !== null) { node.next = current.next; }
-          current.next = node;
-        }
-        return node;
-      }
-      else
-      { current = current.next; }
-    }
-    return null;
-  }
-  public insertBack(data : number)
-  {
+  append(data: LinkedListValueType): SinglePointedNode {
     const node = new SinglePointedNode(data);
     if(!this.head) this.head = node;
     else {
@@ -88,37 +33,138 @@ export class SingleLinkedList implements LinkedList {
       while(current.next !== null) { current = current.next; }
       current.next = node;
     }
-    ++this._count;
+    ++this._size;
     return node;
   }
-  public sort()
-  {
-    if(!this.head) return;
+  insertAfter(data: LinkedListValueType, node: SinglePointedNode): SinglePointedNode {
+    const _node = new SinglePointedNode(data)
+    if(!this.head) this.head = _node;
+    else {
+      let current = this.head;
+      while(current.next !== null && current.id !== node.id) { 
+        current = current.next; 
+      }
+      if(current.next && current.next.next) _node.next = current.next.next;
+      current.next = _node;
+    }
+    ++this._size;
+    return _node;
+  }
+  // Deletion Methods
+  delete(data: LinkedListValueType): void {
+    if(!this.head) {
+      this.head = null;
+      --this._size;
+    }
     let current = this.head;
-    while(current.next !== null)
-    {
-      if(current.value <= current.next.value)
-      {
-        console.log('this position is sorted.');
-        current = current.next;
+    while(current) {
+      if(current.next && current.next.value === data){
+        if(current.next.next) current.next = current.next.next;
+        else current.next = null;
       }
-      else if(current.value > current.next.value)
-      {
-        console.log('this position is unsorted.')
-        let temp = current;
-        current = current.next;
-        current.next = temp;
-      }
+      current = current.next;
     }
   }
-  public traverse() : SinglePointedNode[] {
-    let nodes: SinglePointedNode[] = [];
+  deleteAt(position: number): void {
+    let currentNode = this.head;
+    let currentPosition = 1;
+    while (
+      currentNode &&
+      currentPosition < position + 1 &&
+      position < this.size + 1
+    ) {
+      if(currentPosition === position - 1) {
+        if(currentNode.next) {
+          if(currentNode.next.next) {
+            currentNode.next = currentNode.next.next;
+          }
+          else currentNode.next = null;
+        }
+        --this._size;
+      }
+      currentNode = currentNode.next;
+    }
+  }
+  deleteNode(node: SinglePointedNode): void {
+    if(this.head === node) {
+      this.head = null;
+      --this._size;
+    }
     let current = this.head;
-    while(current)
-    {
-      nodes.push(current);
+    while(current) {
+      if(current.next === node) {
+        if(current.next.next){
+          current.next = current.next.next;
+        } else {
+          current.next = null;
+        }
+        --this._size;
+      }
+      current = current.next;
+    }
+  }
+  // Search methods
+  isEmpty(): boolean {
+    return this._head ? true : false;
+  }
+  search(data: LinkedListValueType): SinglePointedNode | null {
+    let current = this.head;
+    while(current) {
+      if(current.value === data) {
+        return current;
+      }
+      current = current.next;
+    }
+    return current;
+  }
+  contains(data: LinkedListValueType): boolean {
+    let current = this.head;
+    while(current) {
+      if(current.value === data) {
+        return true;
+      }
+      current = current.next;
+    }
+    return false;
+  }
+  at(position: number): SinglePointedNode | null {
+    let currentNode = this.head;
+    let currentPosition = 1;
+    while (
+      currentNode &&
+      currentPosition < position + 1 &&
+      position < this.size + 1
+    ) {
+      if(currentPosition === position - 1) {
+        return currentNode;
+      }
+      currentNode = currentNode.next;
+    }
+    return null;
+  }
+  // Manipulation Methods
+  toArray(): Array<SinglePointedNode | null> {
+    let current = this.head;
+    let nodes = [current];
+    while (current) {
+      nodes.push(current.next);
       current = current.next;
     }
     return nodes;
+  }
+  reverse(): void {
+    
+  }
+  concatenate(list: LinkedList): void {
+    let current = this.head;
+    while(current){
+      while(current.next){
+        current.next = current.next.next;
+      }
+      current.next = list.head;
+      while(current.next){
+        current.next = current.next.next;
+      }
+    }
   }
 }

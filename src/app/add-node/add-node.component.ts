@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
-import { SingleLinkedList } from '../shared/newModels/models/SingleLinkedList';
-import { DoubleLinkedList } from '../shared/newModels/models/DoubleLinkedList';
-import { CircularlyLinkedList } from '../shared/newModels/models/CircularlyLinkedList';
+import { SingleLinkedList } from '../shared/models/SingleLinkedList';
+import { DoubleLinkedList } from '../shared/models/DoubleLinkedList';
+import { CircularlyLinkedList } from '../shared/models/CircularlyLinkedList';
+import { LinkedList } from '../shared/models/LinkedList';
 
 @Component({
   selector: 'app-add-node',
@@ -11,7 +12,7 @@ import { CircularlyLinkedList } from '../shared/newModels/models/CircularlyLinke
 export class AddNodeComponent {
   @Output() addNodeFront = new EventEmitter<number>();
   @Output() addNodeBack = new EventEmitter<number>();
-  @Input() list : SingleLinkedList | DoubleLinkedList | CircularlyLinkedList | null = null;
+  @Input() list : SingleLinkedList | DoubleLinkedList | CircularlyLinkedList | LinkedList |  null = null;
   value : number = 0;
   addNewNode(direction: string)
   {

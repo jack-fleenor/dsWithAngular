@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { DoubleLinkedList } from '../shared/newModels/models/DoubleLinkedList';
-import { DoublePointedNode } from '../shared/newModels/models/DoublePointedNode';
+import { DoubleLinkedList } from '../shared/models/DoubleLinkedList';
+import { DoublePointedNode } from '../shared/models/DoublePointedNode';
 
 @Component({
   selector: 'app-double-linked-list',

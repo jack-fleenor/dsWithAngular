@@ -1,13 +1,29 @@
-import { SinglePointedNode } from './SinglePointedNode';
 import { Node } from "./Node";
+
+export type LinkedListValueType = number;
+
 export interface LinkedList {
-  head : Node | null;
-  _count : number;
-  count() : number;
-  remove(_id : string) : void;
-  insertFront(data : number) : void;
-  insertAt(value : number, target : string, direction: string) : Node | null;
-  insertBack(data : number) : Node;
-  sort() : void;
-  traverse() : Node[];
+  // Setters
+  // set head(node: Node | null);
+  // set next(node : Node);
+  // Getters
+  get head() : Node | any;
+  // get size() : number;
+  // Insertion Methods
+  prepend(data : LinkedListValueType) : Node;
+  append(data : LinkedListValueType) : Node;
+  insertAfter(data : LinkedListValueType, node : Node) : Node;
+  // Deletion Methods
+  delete(data : LinkedListValueType) : void;
+  deleteAt(position : number) :  void;
+  deleteNode(node : Node) : void;
+  // Search methods
+  isEmpty() : boolean;
+  search(data : LinkedListValueType) : Node | null;
+  contains(data : LinkedListValueType) : boolean;
+  at(position : number) : Node | null;
+  // Manipulation Methods
+  toArray(): Array<Node | null>;
+  reverse(): void;
+  concatenate(list : LinkedList): void;
 }

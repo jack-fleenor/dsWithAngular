@@ -23,11 +23,6 @@
               Next: A reference or pointer to the next node in the sequence, just like in a singly linked list. This
               pointer connects the current node to the following node.
             </div>
-            <div class="card-text" style="margin-bottom: 15px;">
-              Previous: A reference or pointer to the previous node in the sequence. This is the key feature that
-              distinguishes a doubly linked list from a singly linked list. The previous pointer allows you to traverse
-              the list in both directions, forwards and backwards.
-            </div>
             <img src="../../assets/Circle Linked List.gif" alt="this slowpoke moves" width="250" />
             <div class="card-text" style="margin-bottom: 15px;">
               Key characteristics of a circular linked list:
@@ -50,39 +45,29 @@
         </div>
       </div>
       <div class="col-4">
+        <div style="display: flex; justify-content: space-evenly;" class="mt-2">
+          <button class="btn btn-secondary" (click)="$event.preventDefault(); generateDummyData()">
+            Generate Dummy Data
+          </button>
+        </div>
         <div class="card" style="width: 100%">
           <div class="card-body" style="text-align: center;">
             <app-add-node [list]="this.list" (addNodeBack)="this.list.append($event)"
               (addNodeFront)="this.list.prepend($event)" class="card-text"></app-add-node>
-            <div style="display: flex; justify-content: space-evenly;" class="mt-2">
-              <button class="btn btn-secondary" (click)="$event.preventDefault(); generateDummyData()">
-                Generate Dummy Data
-              </button>
-            </div>
-            <div *ngIf="this.current !== null else null" class="card mt-2"
-              style="width: 100%">
-              <button class="btn btn-primary" [disabled]="this.current.prev === null"
-                (click)="changePosition('backward')">
-                <h4>
-                  {{this.current.prev === null ? 'null_ptr' :
-                  this.current!.prev.id.substring(0, 5) + '...'}}
-                  <i class="bi bi-arrow-bar-left"></i>
-                </h4>
-              </button>
+            <div *ngIf="this.current !== null else null" class="card mt-2" style="width: 100%">
               <div>
-                <h1 *ngIf="this.list.at(1)!.id === this.current.id else null">
+                <h4 *ngIf="this.list.head === this.current else null">
                   Head Node
-                </h1>
-                <h1
-                  *ngIf="this.list.at(list.size)!.id === this.current.id else null">
+                </h4>
+                <h4 *ngIf="this.current.next === this.list.head else null">
                   Tail Node
-                </h1>
+                </h4>
               </div>
-              <app-double-pointed-node [node]="this.current!"></app-double-pointed-node>
+              <app-node [node]="this.current"></app-node>
               <button class="btn btn-primary" (click)="changePosition('forward')">
                 <h4>
                   {{this.current.next === null ? 'null_ptr' :
-                  this.current.next.id.substring(0, 5) + '...'}}
+                  this.current.next.id.substring(0, 5)}}
                   <i class="bi bi-arrow-bar-right"></i>
                 </h4>
               </button>

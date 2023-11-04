@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { SingleLinkedList } from '../shared/newModels/models/SingleLinkedList';
-import { SinglePointedNode } from '../shared/newModels/models/SinglePointedNode';
+import { SingleLinkedList } from '../shared/models/SingleLinkedList';
+import { SinglePointedNode } from '../shared/models/SinglePointedNode';
 
 @Component({
   selector: 'app-single-linked-list',

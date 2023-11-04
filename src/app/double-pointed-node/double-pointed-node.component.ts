@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DoublePointedNode } from '../shared/newModels/models/DoublePointedNode';
+import { DoublePointedNode } from '../shared/models/DoublePointedNode';
 
 @Component({
   selector: 'app-double-pointed-node',

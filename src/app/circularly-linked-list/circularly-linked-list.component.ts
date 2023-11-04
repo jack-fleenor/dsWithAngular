@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CircularlyLinkedList } from '../shared/newModels/models/CircularlyLinkedList';
-import { DoublePointedNode } from '../shared/newModels/models/DoublePointedNode';
+import { CircularlyLinkedList } from '../shared/models/CircularlyLinkedList';
+import { SinglePointedNode } from '../shared/models/SinglePointedNode';
 
 @Component({
   selector: 'app-circularly-linked-list',
@@ -9,12 +9,12 @@ import { DoublePointedNode } from '../shared/newModels/models/DoublePointedNode'
 })
 export class CircularlyLinkedListComponent {
   list : CircularlyLinkedList = new CircularlyLinkedList();
-  current : DoublePointedNode | null = null;
+  current : SinglePointedNode | null = null;
   code = `export class LinkedList {
     public head : Node | null = null;
     public insert(data : number)
     {
-      const node = new DoublePointedNode(data);
+      const node = new SinglePointedNode(data);
       if (!this.head) { this.head = node; }
       else if(this.head)
       {
@@ -26,11 +26,13 @@ export class CircularlyLinkedListComponent {
       this._count++;
     }
   }`
-  currentPosition : number = 1;
   changePosition(direction: 'forward' | 'backward'){
     if(this.list){
-      if(direction === 'forward') { this.current = this.current ? this.current.next : null; }
-      else this.current = this.current ? this.current.prev : null;
+      if(direction === 'forward'){
+        if(this.current){
+          this.current = this.current.next !== null ? this.current.next : this.list.head;
+        }
+      }
     }
   }
   generateRandomNumber(max: number, min: number){

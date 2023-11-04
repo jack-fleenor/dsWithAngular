@@ -1,32 +1,26 @@
-import { DoublePointedNode } from "../models/DoublePointedNode";
-import { LinkedList } from "./LinkedList";
+import { DoublePointedNode } from "./DoublePointedNode";
+import { LinkedList, LinkedListValueType } from "./LinkedList";
 
 export class DoubleLinkedList implements LinkedList {
-  public head : DoublePointedNode | null = null;
-  public _count : number = 0;
-  public count()
+  private _head : DoublePointedNode | null;
+  private _size : number;
+  constructor(data? : LinkedListValueType)
   {
-    return this._count
+    this._head = data ? new DoublePointedNode(data) : null;
+    this._size = this._head ? 1 : 0;
   }
-  public get headNode() : DoublePointedNode | null {
-    return this.head;
+  // Getters
+  public get head(): DoublePointedNode | null  { return this._head; };
+  public get size(): number { return this._size; }
+  // Setters
+  public set head(node : DoublePointedNode | null) {
+    this._head = node ? node : null;
   }
-  public getNodeByPosition(position : number): DoublePointedNode | null {
-    let currentPosition = 1;
-    let node : DoublePointedNode | null = this.head;
-    while(currentPosition < this.count() && node)
-    {
-      if(currentPosition === position){
-        return node;
-      }
-      if(node.next)
-      {node = node.next;}
-      ++currentPosition;
-    }
-    return node;
+  public set next(node: DoublePointedNode) {
+    this.head ? this.head.next = node : this.head = node;
   }
-  public insertFront(data: number)
-  {
+  // Insertion Methods
+  prepend(data: number): DoublePointedNode {
     const node = new DoublePointedNode(data);
     if (!this.head) { this.head = node; }
     else if(this.head)
@@ -36,37 +30,10 @@ export class DoubleLinkedList implements LinkedList {
       this.head.next = temp;
       temp.prev = this.head;
     }
-    this._count++;
+    ++this._size;
+    return node;
   }
-  public remove(_id: string)
-  {
-    if(this.head && this.head.id === _id){
-      if(this.head.next)
-      {
-        this.head = this.head.next;
-        this.head.prev = null;
-      } else { this.head = null; }
-    }
-    let current = this.head;
-    while (current !== null) {
-      if(current.id === _id)
-      {
-        if(current.next) current.next.prev = current.prev;
-        if(current.prev) current.prev.next = current.next;
-        --this._count;
-        return;
-      }
-      current = current.next;
-    }
-    --this._count;
-    return;
-  }
-  insertAt(value : number, target : string, direction: string)
-  {
-    return null;
-  };
-  insertBack(data : number)
-  {
+  append(data: number): DoublePointedNode {
     const node = new DoublePointedNode(data);
     if(!this.head) this.head = node;
     else {
@@ -75,18 +42,146 @@ export class DoubleLinkedList implements LinkedList {
       node.prev = current;
       current.next = node;
     }
-    ++this._count;
+    ++this._size;
     return node;
-  };
-  sort(){}
-  traverse()
-  {
-    let nodes: DoublePointedNode[] = [];
+  }
+  insertAfter(data: number, node: DoublePointedNode): DoublePointedNode {
+    const _node = new DoublePointedNode(data)
+    if(!this.head) this.head = _node;
+    else {
+      let current = this.head;
+      while(current.next !== null && current.id !== node.id) { 
+        current = current.next; 
+      }
+      if(current.next && current.next.next) {
+        _node.prev = current;
+        _node.next = current.next.next;
+      }
+      current.next = _node;
+    }
+    ++this._size;
+    return _node;
+  }
+  // Deletion Methods
+  delete(data: number): void {
+    if(!this.head) {
+      this.head = null;
+      --this._size;
+    }
     let current = this.head;
+    while(current) {
+      if(current.next && current.next.value === data){
+        if(current.next.next) {
+          current.next = current.next.next;
+          current.next.prev = current;
+        }
+        else current.next = null;
+      }
+      current = current.next;
+    }
+  }
+  deleteAt(position: number): void {
+    let current = this.head;
+    let currentPosition = 1;
+    while (
+      current &&
+      currentPosition < position + 1 &&
+      position < this.size + 1
+    ) {
+      if(currentPosition === position - 1) {
+        if(current.next) {
+          if(current.next.next) {
+            current.next = current.next.next;
+            current.next.prev = current;
+          }
+          else current.next = null;
+        }
+        --this._size;
+      }
+      current = current.next;
+    }
+  }
+  deleteNode(node: DoublePointedNode): void {
+    if(this.head === node) {
+      this.head = null;
+      --this._size;
+    }
+    let current = this.head;
+    while(current) {
+      if(current.next === node) {
+        if(current.next.next){
+          current.next = current.next.next;
+          current.next.prev = current;
+        } else {
+          current.next = null;
+        }
+        --this._size;
+      }
+      current = current.next;
+    }
+  }
+  // Search methods
+  isEmpty(): boolean {
+    return this._head ? true : false;
+  }
+  search(data: number): DoublePointedNode | null {
+    let current = this.head;
+    while(current) {
+      if(current.value === data) {
+        return current;
+      }
+      current = current.next;
+    }
+    return current;
+  }
+  contains(data: number): boolean {
+    let current = this.head;
+    while(current) {
+      if(current.value === data) {
+        return true;
+      }
+      current = current.next;
+    }
+    return false;
+  }
+  at(position: number): DoublePointedNode | null {
+    let currentNode = this.head;
+    let currentPosition = 1;
+    while (
+      currentNode &&
+      currentPosition < position + 1 &&
+      position < this.size + 1
+    ) {
+      if(currentPosition === position - 1) {
+        return currentNode;
+      }
+      currentNode = currentNode.next;
+    }
+    return null;
+  }
+  // Manipulation Methods
+  toArray(): Array<DoublePointedNode | null> {
+    let current = this.head;
+    let nodes = [current];
     while (current) {
-      nodes.push(current);
+      nodes.push(current.next);
       current = current.next;
     }
     return nodes;
+  }
+  reverse(): void {
+    
+  }
+  concatenate(list: LinkedList): void {
+    let current = this.head;
+    while(current){
+      while(current.next){
+        current.next = current.next.next;
+      }
+      current.next = list.head;
+      while(current.next){
+        current.next = current.next.next;
+      }
+    }
   }
 }

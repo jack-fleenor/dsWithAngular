@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { SinglePointedNode } from '../shared/newModels/models/SinglePointedNode';
+import { Node } from '../shared/models/Node';
 
 @Component({
   selector: 'app-node',
@@ -7,5 +7,5 @@ import { SinglePointedNode } from '../shared/newModels/models/SinglePointedNode'
   styleUrls: ['./node.component.scss'],
 })
 export class NodeComponent {
-  @Input() node: SinglePointedNode = new SinglePointedNode(0);
+  @Input() node: Node | null = null;
 }
