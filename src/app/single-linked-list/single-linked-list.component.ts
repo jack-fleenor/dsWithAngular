@@ -8,12 +8,9 @@ import { SinglePointedNode } from '../shared/models/SinglePointedNode';
   styleUrls: ['./single-linked-list.component.scss']
 })
 export class SingleLinkedListComponent {
-  list : SingleLinkedList | null = null;
+  list : SingleLinkedList = new SingleLinkedList();
   current : SinglePointedNode | null = null;
   code = `
-  import { LinkedList, LinkedListValueType } from './LinkedList';
-  import { SinglePointedNode } from './SinglePointedNode';
-  
   export class SingleLinkedList implements LinkedList {
     private _head : SinglePointedNode | null = null;
     private _size : number = 0;
@@ -28,7 +25,7 @@ export class SingleLinkedListComponent {
       this.head ? this.head.next = node : this.head = node;
     }
     // Insertion Methods
-    prepend(data: number): SinglePointedNode {
+    prepend(data: LinkedListValueType): SinglePointedNode {
       const node = new SinglePointedNode(data);
       if(!this.head) this.head = node;
       else {
@@ -38,7 +35,7 @@ export class SingleLinkedListComponent {
       ++this._size;
       return node;
     }
-    append(data: number): SinglePointedNode {
+    append(data: LinkedListValueType): SinglePointedNode {
       const node = new SinglePointedNode(data);
       if(!this.head) this.head = node;
       else {
@@ -49,7 +46,7 @@ export class SingleLinkedListComponent {
       ++this._size;
       return node;
     }
-    insertAfter(data: number, node: SinglePointedNode): SinglePointedNode {
+    insertAfter(data: LinkedListValueType, node: SinglePointedNode): SinglePointedNode {
       const _node = new SinglePointedNode(data)
       if(!this.head) this.head = _node;
       else {
@@ -64,7 +61,7 @@ export class SingleLinkedListComponent {
       return _node;
     }
     // Deletion Methods
-    delete(data: number): void {
+    delete(data: LinkedListValueType): void {
       if(!this.head) {
         this.head = null;
         --this._size;
@@ -120,7 +117,7 @@ export class SingleLinkedListComponent {
     isEmpty(): boolean {
       return this._head ? true : false;
     }
-    search(data: number): SinglePointedNode | null {
+    search(data: LinkedListValueType): SinglePointedNode | null {
       let current = this.head;
       while(current) {
         if(current.value === data) {
@@ -130,7 +127,7 @@ export class SingleLinkedListComponent {
       }
       return current;
     }
-    contains(data: number): boolean {
+    contains(data: LinkedListValueType): boolean {
       let current = this.head;
       while(current) {
         if(current.value === data) {

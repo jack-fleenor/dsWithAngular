@@ -10,16 +10,21 @@
               </h2>
             </div>
             <div class="card-text" style="margin-bottom: 15px;">
-              A doubly linked list is a data structure that extends the concept of a singly linked list. Like a singly linked list, it is a collection of elements, or nodes, but each node in a doubly linked list contains three components:
+              A doubly linked list is a data structure that extends the concept of a singly linked list. Like a singly
+              linked list, it is a collection of elements, or nodes, but each node in a doubly linked list contains
+              three components:
             </div>
             <div class="card-text" style="margin-bottom: 15px;">
               Data: This is the actual value or payload held by the node. It can be of any data type.
             </div>
             <div class="card-text" style="margin-bottom: 15px;">
-              Next: A reference or pointer to the next node in the sequence, just like in a singly linked list. This pointer connects the current node to the following node.
+              Next: A reference or pointer to the next node in the sequence, just like in a singly linked list. This
+              pointer connects the current node to the following node.
             </div>
             <div class="card-text" style="margin-bottom: 15px;">
-              Previous: A reference or pointer to the previous node in the sequence. This is the key feature that distinguishes a doubly linked list from a singly linked list. The previous pointer allows you to traverse the list in both directions, forwards and backwards.
+              Previous: A reference or pointer to the previous node in the sequence. This is the key feature that
+              distinguishes a doubly linked list from a singly linked list. The previous pointer allows you to traverse
+              the list in both directions, forwards and backwards.
             </div>
             <img src="../../assets/Double Linked List.gif" alt="this slowpoke moves" width="250" />
             <div class="card-text" style="text-align: left;">
@@ -31,43 +36,44 @@
         </div>
       </div>
       <div class="col-4">
-        <div style="display: flex; justify-content: space-evenly;" class="mt-2">
-          <button class="btn btn-secondary" (click)="$event.preventDefault(); generateDummyData()">
-            Generate Dummy Data
-          </button>
-        </div>
+
         <div class="card" style="width: 100%">
-          <div class="card-body" style="text-align: center;" *ngIf="this.list else null">
+          <div class="card-body">
             <app-add-node [list]="this.list" (addNodeBack)="this.list.append($event)"
               (addNodeFront)="this.list.prepend($event)" class="card-text"></app-add-node>
-            <div *ngIf="this.current !== null else null" class="card mt-2"
-              style="width: 100%">
-              <div>
-                <h4 *ngIf="this.list.head === this.current else null">
-                  Head Node
-                </h4>
-                <h4 *ngIf="this.current.next === null else null">
-                  Tail Node
-                </h4>
-              </div>
-              <app-double-pointed-node [node]="this.current"></app-double-pointed-node>
-              <button class="btn btn-primary" [disabled]="!this.current.prev"
-              (click)="changePosition('backward')">
+          </div>
+          <div class="card-actions mb-3">
+            <button class="btn btn-secondary" (click)="$event.preventDefault(); generateDummyData()">
+              Generate Dummy Data
+            </button>
+          </div>
+          <div class="card-body" style="text-align: center;" *ngIf="this.list && this.current else null">
+            <div *ngIf="this.current !== null else null" class="card-text mt-2"
+              style="width: 100%; height: 20px; display: flex; align-items: center; justify-content: center;">
+              <h4 *ngIf="this.list.head === this.current else null">
+                Head Node
+              </h4>
+              <h4 *ngIf="this.current.next === null else null">
+                Tail Node
+              </h4>
+            </div>
+            <app-double-pointed-node [node]="this.current"></app-double-pointed-node>
+          </div>
+          <div class="d-grid gap-2 card-actions m-3" style="display: flex;" *ngIf="this.current">
+            <button class="btn btn-primary" [disabled]="!this.current.prev" (click)="changePosition('backward')">
               <h4>
-                {{this.current.prev === null ? 'null_ptr' :
-                this.current.prev.id.substring(0, 5) + '...'}}
                 <i class="bi bi-arrow-bar-left"></i>
+                {{this.current.prev === null ? 'null_ptr' :
+                this.current.prev.id.substring(0, 5)}}
               </h4>
             </button>
-              <button class="btn btn-primary" [disabled]="!this.current.next"
-                (click)="changePosition('forward')">
-                <h4>
-                  {{this.current.next === null ? 'null_ptr' :
-                  this.current.next.id.substring(0, 5) + '...'}}
-                  <i class="bi bi-arrow-bar-right"></i>
-                </h4>
-              </button>
-            </div>
+            <button class="btn btn-primary" [disabled]="!this.current.next" (click)="changePosition('forward')">
+              <h4>
+                {{this.current.next === null ? 'null_ptr' :
+                this.current.next.id.substring(0, 5)}}
+                <i class="bi bi-arrow-bar-right"></i>
+              </h4>
+            </button>
           </div>
         </div>
       </div>

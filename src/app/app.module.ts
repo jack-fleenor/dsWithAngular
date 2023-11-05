@@ -12,7 +12,6 @@ import { StaticArrayComponent } from './static-array/static-array.component';
 import { DynamicArrayComponent } from './dynamic-array/dynamic-array.component';
 import { DoublePointedNodeComponent } from './double-pointed-node/double-pointed-node.component';
 import { AnimatedNodeComponent } from './animated-node/animated-node.component';
-import { LinkedListComponent } from './linked-list/linked-list.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +26,6 @@ import { LinkedListComponent } from './linked-list/linked-list.component';
     DynamicArrayComponent,
     DoublePointedNodeComponent,
     AnimatedNodeComponent,
-    LinkedListComponent,
   ],
   imports: [
     BrowserModule,

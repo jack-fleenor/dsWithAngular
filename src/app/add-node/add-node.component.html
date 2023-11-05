@@ -1,6 +1,7 @@
 <div style="max-width: 18rem; margin: auto;">
   <div class="m-3">
-    <h4>Add Node</h4>
+    <h4 *ngIf="list && list.head === null else null">Create Node</h4>
+    <h4 *ngIf="list && list.head">Add Node</h4>
     <input class="form-control" type="number" [(ngModel)]="value" />
   </div>
   <div style="display: flex; justify-content: space-evenly;">

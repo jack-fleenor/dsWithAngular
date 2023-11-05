@@ -32,13 +32,11 @@
         </div>
       </div>
       <div class="col-4">
-
         <div class="card" style="width: 100%">
           <div class="card-body">
-            <app-add-node *ngIf="this.list" [list]="this.list" (addNodeBack)="this.list.append($event)"
-              (addNodeFront)="this.list.prepend($event)" class="card-text"></app-add-node>
+            <app-add-node [list]="this.list" (addNodeBack)="this.list.append($event)" (addNodeFront)="this.list.prepend($event)" class="card-text"></app-add-node>
           </div>
-          <div class="card-actions">
+          <div class="card-actions mb-3">
             <button class="btn btn-secondary" (click)="$event.preventDefault(); generateDummyData()">
               Generate Dummy Data
             </button>
@@ -55,13 +53,12 @@
             </div>
             <app-node [node]="this.current"></app-node>
           </div>
-        <div class="card-actions" *ngIf="this.current">
-          <button class="btn btn-primary" [disabled]="!this.current.next" (click)="changePosition('forward')">
+          <div class="d-grid gap-2 card-actions m-3" *ngIf="this.current">
+            <button class="btn btn-primary" [disabled]="!this.current.next" (click)="changePosition('forward')">
             <h4>
               {{this.current.next === null ? 'null_ptr' :
               this.current.next.id.substring(0, 5) + '...'}}
-              <i class="bi bi-arrow-bar-right"></i>
-            </h4>
+              <i class="bi bi-arrow-bar-right"></i>            </h4>
           </button>
         </div>
         </div>
