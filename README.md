@@ -1,29 +1,52 @@
-# App
+# Data Structures with Angular
+This is a personal portfolio project in Angular that provides a description and sample implementations of three commonly used linked list data structures: Single Linked List, Double Linked List, and Circular Linked List.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.6.
+## Introduction
+Linked lists are fundamental data structures used in computer science and programming. This project serves as an educational resource to understand and implement three types of linked lists: Single Linked List, Double Linked List, and Circular Linked List in Angular. The project provides code samples, explanations, and a simple user interface to visualize and interact with these data structures.
 
-## Development server
+## Prerequisites
+Before you begin, ensure you have met the following requirements:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Node.js installed on your system.
+- Angular CLI installed.
+- A code editor, such as Visual Studio Code.
 
-## Code scaffolding
+## Getting Started
+Clone this repository to your local machine:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+#### Copy code
+```bash
+git clone https://github.com/yourusername/your-repo.git
+```
+#### Change your working directory to the project folder:
+```bash
+cd angular-linked-list-data-structures
+```
+#### Install the required dependencies:
+```bash
+npm install
+```
+#### Start the development server:
+``` bash
+ng serve
+```
+Open your web browser and navigate to http://localhost:4200/ to interact with the project.
 
-## Build
+<video width="480" height="240" controls>
+  <source src="./src/assets/Example.mp4" type="video/mp4">
+</video>
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Single Linked List
+The Single Linked List is a linear data structure in which each element points to the next element, forming a chain. This project includes a sample implementation of a Single Linked List, which you can explore and visualize in the user interface.
 
-## Running unit tests
+<img src="./src/assets/singlelinkedlist.gif" width="400"/>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Double Linked List
+The Double Linked List is similar to the Single Linked List, but each element points to both the next and previous elements. This allows for more versatile operations, such as traversal in both directions. The project includes a sample implementation of a Double Linked List.
 
-## Running end-to-end tests
+<img src="./src/assets/Double Linked List.gif" width="400"/>
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Circular Linked List
+A Circular Linked List is a variation of a linked list where the last element points back to the first element, creating a loop. This project provides a sample implementation of a Circular Linked List, and you can see how it works in the user interface.
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-<img src="./src//assets/Example.mov" width="200"/>
+<img src="./src/assets/Circle Linked List.gif" width="400"/>
