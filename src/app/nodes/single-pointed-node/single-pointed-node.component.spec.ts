@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NodeComponent } from './node.component';
+import { SinglePointedNodeComponent } from './single-pointed-node.component';
 
 describe('NodeComponent', () => {
-  let component: NodeComponent;
-  let fixture: ComponentFixture<NodeComponent>;
+  let component: SinglePointedNodeComponent;
+  let fixture: ComponentFixture<SinglePointedNodeComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NodeComponent]
+      declarations: [SinglePointedNodeComponent]
     });
-    fixture = TestBed.createComponent(NodeComponent);
+    fixture = TestBed.createComponent(SinglePointedNodeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

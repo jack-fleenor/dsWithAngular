@@ -65,7 +65,7 @@
                 Tail Node
               </h4>
             </div>
-            <app-node [node]="this.current"></app-node>
+            <app-single-pointed-node [node]="this.current"></app-single-pointed-node>
           </div>
             <div class="d-grid gap-2 card-actions m-3" *ngIf="this.current">
               <button class="btn btn-primary" [disabled]="!this.current.next" (click)="changePosition('forward')">

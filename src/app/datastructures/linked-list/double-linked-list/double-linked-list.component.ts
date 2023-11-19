@@ -1,62 +1,62 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CircularlyLinkedList } from '../shared/models/CircularlyLinkedList';
-import { SinglePointedNode } from '../shared/models/SinglePointedNode';
+import { Component, Input } from '@angular/core';
+import { DoubleLinkedList } from '../../../shared/models/DoubleLinkedList';
+import { DoublePointedNode } from '../../../shared/models/DoublePointedNode';
 
 @Component({
-  selector: 'app-circularly-linked-list',
-  templateUrl: './circularly-linked-list.component.html',
-  styleUrls: ['./circularly-linked-list.component.scss']
+  selector: 'app-double-linked-list',
+  templateUrl: './double-linked-list.component.html',
+  styleUrls: ['./double-linked-list.component.scss']
 })
-export class CircularlyLinkedListComponent {
-  list : CircularlyLinkedList = new CircularlyLinkedList();
-  current : SinglePointedNode | null = null;
+export class DoubleLinkedListComponent {
+  list : DoubleLinkedList = new DoubleLinkedList();
+  current : DoublePointedNode | null = null;
   code = `
-  export class CircularlyLinkedList implements LinkedList {
-  
-    private _head : SinglePointedNode | null;
+  export class DoubleLinkedList implements LinkedList {
+    private _head : DoublePointedNode | null;
     private _size : number;
     constructor(data? : LinkedListValueType)
     {
-      this._head = data ? new SinglePointedNode(data) : null;
+      this._head = data ? new DoublePointedNode(data) : null;
       this._size = this._head ? 1 : 0;
     }
     // Getters
-    public get head(): SinglePointedNode | null  { return this._head; };
+    public get head(): DoublePointedNode | null  { return this._head; };
     public get size(): number { return this._size; }
     // Setters
-    public set head(node : SinglePointedNode | null) {
+    public set head(node : DoublePointedNode | null) {
       this._head = node ? node : null;
     }
-    public set next(node: SinglePointedNode) {
+    public set next(node: DoublePointedNode) {
       this.head ? this.head.next = node : this.head = node;
     }
     // Insertion Methods
-    prepend(data: number): SinglePointedNode {
-      const node = new SinglePointedNode(data);
-      if(!this.head) this.head = node;
-      else {
-        node.next = this.head;
+    prepend(data: number): DoublePointedNode {
+      const node = new DoublePointedNode(data);
+      if (!this.head) { this.head = node; }
+      else if(this.head)
+      {
+        const temp = this.head;
         this.head = node;
+        this.head.next = temp;
+        temp.prev = this.head;
       }
       ++this._size;
       return node;
     }
-    append(data: number): SinglePointedNode {
-      const node = new SinglePointedNode(data);
+    append(data: number): DoublePointedNode {
+      const node = new DoublePointedNode(data);
       if(!this.head) this.head = node;
       else {
         let current = this.head;
-        while(current.next !== this.head && current.next) { 
-          current = current.next;
-        }
-        node.next = this.head;
+        while(current.next !== null) { current = current.next; }
+        node.prev = current;
         current.next = node;
       }
       ++this._size;
       return node;
     }
-    insertAfter(data: number, node: SinglePointedNode): SinglePointedNode {
-      const _node = new SinglePointedNode(data)
+    insertAfter(data: number, node: DoublePointedNode): DoublePointedNode {
+      const _node = new DoublePointedNode(data)
       if(!this.head) this.head = _node;
       else {
         let current = this.head;
@@ -64,6 +64,7 @@ export class CircularlyLinkedListComponent {
           current = current.next; 
         }
         if(current.next && current.next.next) {
+          _node.prev = current;
           _node.next = current.next.next;
         }
         current.next = _node;
@@ -82,6 +83,7 @@ export class CircularlyLinkedListComponent {
         if(current.next && current.next.value === data){
           if(current.next.next) {
             current.next = current.next.next;
+            current.next.prev = current;
           }
           else current.next = null;
         }
@@ -100,6 +102,7 @@ export class CircularlyLinkedListComponent {
           if(current.next) {
             if(current.next.next) {
               current.next = current.next.next;
+              current.next.prev = current;
             }
             else current.next = null;
           }
@@ -108,7 +111,7 @@ export class CircularlyLinkedListComponent {
         current = current.next;
       }
     }
-    deleteNode(node: SinglePointedNode): void {
+    deleteNode(node: DoublePointedNode): void {
       if(this.head === node) {
         this.head = null;
         --this._size;
@@ -118,6 +121,7 @@ export class CircularlyLinkedListComponent {
         if(current.next === node) {
           if(current.next.next){
             current.next = current.next.next;
+            current.next.prev = current;
           } else {
             current.next = null;
           }
@@ -130,7 +134,7 @@ export class CircularlyLinkedListComponent {
     isEmpty(): boolean {
       return this._head ? true : false;
     }
-    search(data: number): SinglePointedNode | null {
+    search(data: number): DoublePointedNode | null {
       let current = this.head;
       while(current) {
         if(current.value === data) {
@@ -150,7 +154,7 @@ export class CircularlyLinkedListComponent {
       }
       return false;
     }
-    at(position: number): SinglePointedNode | null {
+    at(position: number): DoublePointedNode | null {
       let currentNode = this.head;
       let currentPosition = 1;
       while (
@@ -166,7 +170,7 @@ export class CircularlyLinkedListComponent {
       return null;
     }
     // Manipulation Methods
-    toArray(): Array<SinglePointedNode | null> {
+    toArray(): Array<DoublePointedNode | null> {
       let current = this.head;
       let nodes = [current];
       while (current) {
@@ -192,20 +196,18 @@ export class CircularlyLinkedListComponent {
     }
   }
   `
+  currentPosition : number = 1;
   changePosition(direction: 'forward' | 'backward'){
     if(this.list){
-      if(direction === 'forward'){
-        if(this.current){
-          this.current = this.current.next !== null ? this.current.next : this.list.head;
-        }
-      }
+      if(direction === 'forward') { this.current = this.current ? this.current.next : null; }
+      else this.current = this.current ? this.current.prev : null;
     }
   }
   generateRandomNumber(max: number, min: number){
     return  Math.floor(Math.random() * (max - min + 1) + min)
   }
   generateDummyData(){
-    this.list = new CircularlyLinkedList();
+    this.list = new DoubleLinkedList();
     for (let index = 0; index < 10; index++) {
       this.list.append(this.generateRandomNumber(100000, 0));
     }

@@ -1,79 +1,67 @@
 import { Component, Input } from '@angular/core';
-import { DoubleLinkedList } from '../shared/models/DoubleLinkedList';
-import { DoublePointedNode } from '../shared/models/DoublePointedNode';
+import { SingleLinkedList } from '../../../shared/models/SingleLinkedList';
+import { SinglePointedNode } from '../../../shared/models/SinglePointedNode';
 
 @Component({
-  selector: 'app-double-linked-list',
-  templateUrl: './double-linked-list.component.html',
-  styleUrls: ['./double-linked-list.component.scss']
+  selector: 'app-single-linked-list',
+  templateUrl: './single-linked-list.component.html',
+  styleUrls: ['./single-linked-list.component.scss']
 })
-export class DoubleLinkedListComponent {
-  list : DoubleLinkedList = new DoubleLinkedList();
-  current : DoublePointedNode | null = null;
+export class SingleLinkedListComponent {
+  list : SingleLinkedList = new SingleLinkedList();
+  current : SinglePointedNode | null = null;
   code = `
-  export class DoubleLinkedList implements LinkedList {
-    private _head : DoublePointedNode | null;
-    private _size : number;
-    constructor(data? : LinkedListValueType)
-    {
-      this._head = data ? new DoublePointedNode(data) : null;
-      this._size = this._head ? 1 : 0;
-    }
+  export class SingleLinkedList implements LinkedList {
+    private _head : SinglePointedNode | null = null;
+    private _size : number = 0;
     // Getters
-    public get head(): DoublePointedNode | null  { return this._head; };
+    public get head(): SinglePointedNode | null  { return this._head; };
     public get size(): number { return this._size; }
     // Setters
-    public set head(node : DoublePointedNode | null) {
+    public set head(node : SinglePointedNode | null) {
       this._head = node ? node : null;
     }
-    public set next(node: DoublePointedNode) {
+    public set next(node: SinglePointedNode) {
       this.head ? this.head.next = node : this.head = node;
     }
     // Insertion Methods
-    prepend(data: number): DoublePointedNode {
-      const node = new DoublePointedNode(data);
-      if (!this.head) { this.head = node; }
-      else if(this.head)
-      {
-        const temp = this.head;
+    prepend(data: LinkedListValueType): SinglePointedNode {
+      const node = new SinglePointedNode(data);
+      if(!this.head) this.head = node;
+      else {
+        node.next = this.head;
         this.head = node;
-        this.head.next = temp;
-        temp.prev = this.head;
       }
       ++this._size;
       return node;
     }
-    append(data: number): DoublePointedNode {
-      const node = new DoublePointedNode(data);
+    append(data: LinkedListValueType): SinglePointedNode {
+      const node = new SinglePointedNode(data);
       if(!this.head) this.head = node;
       else {
         let current = this.head;
         while(current.next !== null) { current = current.next; }
-        node.prev = current;
         current.next = node;
       }
       ++this._size;
       return node;
     }
-    insertAfter(data: number, node: DoublePointedNode): DoublePointedNode {
-      const _node = new DoublePointedNode(data)
+    insertAfter(data: LinkedListValueType, node: SinglePointedNode): SinglePointedNode {
+      const _node = new SinglePointedNode(data)
       if(!this.head) this.head = _node;
       else {
         let current = this.head;
         while(current.next !== null && current.id !== node.id) { 
           current = current.next; 
         }
-        if(current.next && current.next.next) {
-          _node.prev = current;
-          _node.next = current.next.next;
-        }
+        if(current.next && current.next.next) _node.next = current.next.next;
         current.next = _node;
       }
       ++this._size;
       return _node;
     }
     // Deletion Methods
-    delete(data: number): void {
+    delete(data: LinkedListValueType): void {
       if(!this.head) {
         this.head = null;
         --this._size;
@@ -81,37 +69,33 @@ export class DoubleLinkedListComponent {
       let current = this.head;
       while(current) {
         if(current.next && current.next.value === data){
-          if(current.next.next) {
-            current.next = current.next.next;
-            current.next.prev = current;
-          }
+          if(current.next.next) current.next = current.next.next;
           else current.next = null;
         }
         current = current.next;
       }
     }
     deleteAt(position: number): void {
-      let current = this.head;
+      let currentNode = this.head;
       let currentPosition = 1;
       while (
-        current &&
+        currentNode &&
         currentPosition < position + 1 &&
         position < this.size + 1
       ) {
         if(currentPosition === position - 1) {
-          if(current.next) {
-            if(current.next.next) {
-              current.next = current.next.next;
-              current.next.prev = current;
+          if(currentNode.next) {
+            if(currentNode.next.next) {
+              currentNode.next = currentNode.next.next;
             }
-            else current.next = null;
+            else currentNode.next = null;
           }
           --this._size;
         }
-        current = current.next;
+        currentNode = currentNode.next;
       }
     }
-    deleteNode(node: DoublePointedNode): void {
+    deleteNode(node: SinglePointedNode): void {
       if(this.head === node) {
         this.head = null;
         --this._size;
@@ -121,7 +105,6 @@ export class DoubleLinkedListComponent {
         if(current.next === node) {
           if(current.next.next){
             current.next = current.next.next;
-            current.next.prev = current;
           } else {
             current.next = null;
           }
@@ -134,7 +117,7 @@ export class DoubleLinkedListComponent {
     isEmpty(): boolean {
       return this._head ? true : false;
     }
-    search(data: number): DoublePointedNode | null {
+    search(data: LinkedListValueType): SinglePointedNode | null {
       let current = this.head;
       while(current) {
         if(current.value === data) {
@@ -144,7 +127,7 @@ export class DoubleLinkedListComponent {
       }
       return current;
     }
-    contains(data: number): boolean {
+    contains(data: LinkedListValueType): boolean {
       let current = this.head;
       while(current) {
         if(current.value === data) {
@@ -154,7 +137,7 @@ export class DoubleLinkedListComponent {
       }
       return false;
     }
-    at(position: number): DoublePointedNode | null {
+    at(position: number): SinglePointedNode | null {
       let currentNode = this.head;
       let currentPosition = 1;
       while (
@@ -170,7 +153,7 @@ export class DoubleLinkedListComponent {
       return null;
     }
     // Manipulation Methods
-    toArray(): Array<DoublePointedNode | null> {
+    toArray(): Array<SinglePointedNode | null> {
       let current = this.head;
       let nodes = [current];
       while (current) {
@@ -194,20 +177,18 @@ export class DoubleLinkedListComponent {
         }
       }
     }
-  }
-  `
+  }`
   currentPosition : number = 1;
   changePosition(direction: 'forward' | 'backward'){
     if(this.list){
       if(direction === 'forward') { this.current = this.current ? this.current.next : null; }
-      else this.current = this.current ? this.current.prev : null;
     }
   }
   generateRandomNumber(max: number, min: number){
     return  Math.floor(Math.random() * (max - min + 1) + min)
   }
   generateDummyData(){
-    this.list = new DoubleLinkedList();
+    this.list = new SingleLinkedList();
     for (let index = 0; index < 10; index++) {
       this.list.append(this.generateRandomNumber(100000, 0));
     }

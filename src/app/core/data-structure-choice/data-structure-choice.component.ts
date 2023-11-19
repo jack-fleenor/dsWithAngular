@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { DataStructures } from '../shared/models/DataStructures';
+import { DataStructures } from '../../shared/models/DataStructures';
 
 @Component({
   selector: 'app-data-structure-choice',

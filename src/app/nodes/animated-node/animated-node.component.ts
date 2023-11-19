@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { CircularlyLinkedList } from '../shared/models/CircularlyLinkedList';
-import { DoublePointedNode } from '../shared/models/DoublePointedNode';
+import { CircularlyLinkedList } from '../../shared/models/CircularlyLinkedList';
+import { DoublePointedNode } from '../../shared/models/DoublePointedNode';
 
 @Component({
   selector: 'app-animated-node',
